@@ -1,0 +1,13 @@
+@use '../../assets/scss/' as *;
+
+.collection {
+   &__form{
+      height: 50%;
+   }
+	&__table {
+		width: 100%;
+	}
+	&__wrap {
+		// @include flex(center, center, row, 40px);
+	}
+}

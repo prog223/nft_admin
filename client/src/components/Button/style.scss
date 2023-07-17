@@ -1,0 +1,61 @@
+@use '../../assets/scss/' as *;
+
+.button {
+	@include flex(center, center, row, 12px);
+	width: 100%;
+	border: none;
+	border-radius: $border-radius;
+	font-weight: 600;
+	line-height: 140%;
+	cursor: pointer;
+	font-size: 16px;
+
+	svg {
+		height: 20px !important;
+		width: 20px !important;
+	}
+
+	@include mobile {
+		padding: 8px 10px;
+	}
+
+	&:disabled {
+		background-color: #727272c7;
+		cursor: default;
+	}
+}
+
+.main {
+	background-color: $main-color;
+	color: #fff;
+
+	path {
+		fill: #fff !important;
+	}
+}
+
+.white {
+	color: $txt-color-dark;
+	background-color: #fff;
+
+	path {
+		fill: $main-color !important;
+	}
+}
+
+.second {
+	background-color: #1D284E;
+	color: #fff;
+
+	path {
+		fill: $main-color !important;
+	}
+}
+
+.large {
+	height: 60px;
+}
+
+.small {
+	height: 46px;
+}

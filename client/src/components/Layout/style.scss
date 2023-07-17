@@ -1,0 +1,34 @@
+@use '../../assets/scss/' as *;
+
+.sidebar-cont {
+	width: 15vw;
+	transition: all 0.5s;
+	height: 100%;
+
+	&__close {
+		width: 5vw;
+
+		@include tablet {
+			width: 10vw;
+		}
+
+		@include mobile {
+			width: 15vw;
+		}
+	}
+}
+
+.content-cont {
+	width: 95vw;
+
+	@include tablet {
+		width: 90vw;
+	}
+	@include mobile {
+		width: 85vw;
+	}
+
+	&__close {
+		width: 85vw;
+	}
+}
