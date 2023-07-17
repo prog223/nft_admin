@@ -1,0 +1,108 @@
+@use '../../assets/scss/' as *;
+
+.nfts {
+	width: 100%;
+	position: relative;
+
+	&__table {
+		min-height: 400px;
+		
+		&__wrap {
+			height: calc(100vh - 35vh);
+			width: 100%;
+			overflow-x: scroll;
+			overflow-y: scroll;
+
+			@include tablet {
+				height: calc(100vh - 42vh);
+			}
+
+			@include mobile {
+				overflow-x: scroll;
+			}
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+
+		&__btns {
+			@include flex(center, end, row, 10px);
+			margin-top: 20px;
+			width: 100%;
+			button {
+				max-width: 100px;
+			}
+
+			@include tablet{
+				flex-direction: column;
+			}
+		}
+
+		&_number {
+			span {
+				@include flex(center, center);
+				background-color: $body-bg;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				font-family: $font-family-second;
+				line-height: 1;
+				color: #858584;
+
+				@include tablet {
+					background-color: transparent;
+				}
+			}
+		}
+
+		&_reset {
+			button {
+				background-color: transparent;
+				color: #fff;
+				border: 1px solid $main-color;
+				padding: 5px;
+				border-radius: $border-radius;
+				cursor: pointer;
+			}
+		}
+	}
+
+	&__chekbox {
+		@include flex(center, start, row, 20px);
+		flex-wrap: wrap;
+		padding: 20px 30px;
+		background-color: $second-color;
+		border-radius: $border-radius;
+		border: 1px solid $main-color;
+		margin-top: 20px;
+		position: relative;
+		width: 100%;
+
+		@include mobile {
+			padding: 20px;
+		}
+
+		&__search {
+			background-color: #ffffff9a;
+			border-radius: $border-radius;
+			border: none;
+			padding: 8px 10px;
+			// position: absolute;
+			right: 20px;
+			font-size: 13px;
+
+			@include mobile {
+				position: static;
+				width: 100%;
+			}
+		}
+
+		label {
+			cursor: pointer;
+		}
+
+		div {
+			@include flex(center, start, row, 7px);
+		}
+	}
+}

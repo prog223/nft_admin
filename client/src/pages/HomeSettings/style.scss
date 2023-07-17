@@ -1,0 +1,25 @@
+@use '../../assets/scss/' as *;
+
+.home-settings {
+	width: 100%;
+	&__container {
+		background-color: $second-color;
+	}
+	&__form {
+		width: 100%;
+		max-width: 700px;
+		margin: 30px auto;
+		form {
+			@include flex(center, center, column, 10px);
+		}
+	}
+
+   &__greetings{
+      width: 300px;
+
+      img{
+         width: 100%;
+         object-fit: cover;
+      }
+   }
+}
