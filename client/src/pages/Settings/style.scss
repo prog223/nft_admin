@@ -1,0 +1,24 @@
+@use '../../assets/scss/' as *;
+
+.settings {
+	&_forms {
+		padding-top: 30px;
+		@include flex(flex-start, center, column, 30px);
+
+      @include mobile{
+         flex-direction: column
+      }
+		&_form {
+			@include flex(center, center, column, 10px);
+         width: 100%;
+         
+			form {
+				@include flex(center, center, column, 10px);
+				width: 100%;
+				max-width: 400px;
+				padding: 20px;
+				border-radius: $border-radius;
+			}
+		}
+	}
+}

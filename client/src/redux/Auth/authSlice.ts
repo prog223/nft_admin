@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { changePassword, login, logout } from './authService';
+import { changePassword, createAdmin, login, logout } from './authService';
 
 const initialState: { data: any; isLoading: boolean; error: any } = {
 	data: {},
@@ -55,6 +55,20 @@ const authSlice = createSlice({
 				window.location.reload()
 			})
 			.addCase(logout.rejected, (state, action: PayloadAction<any>) => {
+				state.error = action.payload;
+				state.isLoading = false;
+			})
+
+			// Logout
+			.addCase(createAdmin.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(createAdmin.fulfilled, (state, action: PayloadAction<any>) => {
+				state.data = action.payload.data;
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(createAdmin.rejected, (state, action: PayloadAction<any>) => {
 				state.error = action.payload;
 				state.isLoading = false;
 			})

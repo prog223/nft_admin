@@ -27,7 +27,7 @@ const Auth: React.FC = (): JSX.Element => {
 					email: formElement.email.value,
 				})
 			).then((res: any) => {
-				if (!res.error) navigate('/dashboard');
+				if (!res.error) navigate('/admin/dashboard');
 			});
 	};
 

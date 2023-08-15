@@ -9,54 +9,55 @@ import Settings from "../../pages/Settings/Settings";
 import CreateNft from "../../pages/CreateNft/CreateNft";
 import HomeSettings from "../../pages/HomeSettings/HomeSettings";
 import CreateCollection from "../../pages/CreateCollection/CreateCollection";
+import Error from "../../pages/Error/Error";
 
 export function UseRoutes() {
    let element = useRoutes([
       {
-         path:'/',
+         path:'/admin',
          element: <Layout/>,
          children: [
             {
-               path: '/dashboard',
+               path: 'dashboard',
                element: <Dashboard/>
             },
             {
-               path: '/users',
+               path: 'users',
                element: <Users/>
             },
             {
-               path: '/nfts',
+               path: 'nfts',
                element: <Nfts/>
             },
             {
-               path: '/create_nft',
+               path: 'create_nft',
                element: <CreateNft/>
             },
             {
-               path: '/collections',
+               path: 'collections',
                element: <Collections/>
             },
             {
-               path: '/create_collection',
+               path: 'create_collection',
                element: <CreateCollection/>
             },
             {
-               path: '/settings',
+               path: 'settings',
                element: <Settings/>
             },
             {
-               path: '/home_settings',
+               path: 'home_settings',
                element: <HomeSettings/>
             },
          ]
       },
       {
-         path: '/auth',
+         path: '/',
          element: <Auth/>
       },
       {
          path: '*',
-         element: <Auth/>
+         element: <Error/>
       }
    ])
    return element

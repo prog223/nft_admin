@@ -1,7 +1,7 @@
 @use '../../assets/scss/' as *;
 
 .topbar {
-	@include flex(center, end, row, 10px);
+	@include flex(center, flex-end, row, 10px);
 	background-color: rgba(0, 0, 0, 0.199);
 	width: 100%;
 	padding: 15px 20px;

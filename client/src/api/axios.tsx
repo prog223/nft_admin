@@ -27,7 +27,7 @@ export const AxiosInterceptor: React.FC<Props> = ({ children }: Props) => {
 
 		const errInterceptor = (error: AxiosError) => {
 			if (error.response && error.response.status === 401) {
-				navigate('/auth/signin');
+				navigate('/');
 				localStorage.removeItem('user');
 			}
 			return Promise.reject(error);

@@ -164,16 +164,16 @@ const Dashboard: React.FC = (): JSX.Element => {
 						</div>
 					</div>
 					<div className="dashboard__container__requests">
+						<div className="nfts__chekbox checkbox">
+							<input
+								type="text"
+								placeholder="name"
+								onChange={(e) => optimizedFn(e.target.value)}
+								className="nfts__chekbox__search"
+							/>
+						</div>
 						{data?.requests?.requests.length ? (
 							<>
-								<div className="nfts__chekbox checkbox">
-									<input
-										type="text"
-										placeholder="name"
-										onChange={(e) => optimizedFn(e.target.value)}
-										className="nfts__chekbox__search"
-									/>
-								</div>
 								<Table>
 									<TableHeader
 										columns={columns}

@@ -14,4 +14,5 @@ router.post('/logout', logout);
 router.post('/change_password', verifyToken, changePassword);
 router.post('/', createAdmin);
 
+
 export default router;

@@ -10,11 +10,12 @@ export type changeT = {
 }
 
 export type AdminT = {
-	_id: string;
+	_id?: string;
 	name: string;
 	surname: string;
 	email: string;
-	isSuper: boolean;
+	password?: string;
+	isSuper?: boolean;
 };
 
 export type UserT = {

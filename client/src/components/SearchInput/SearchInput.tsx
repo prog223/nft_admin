@@ -9,7 +9,7 @@ interface Props {
 	name: string;
 	field: string;
 	fetch: (search: string) => void;
-	onChange?: any
+	onHandleChange?: any
 }
 
 const SearchInput: React.FC<Props> = ({
@@ -17,7 +17,7 @@ const SearchInput: React.FC<Props> = ({
 	name,
 	field,
 	fetch,
-	onChange
+	onHandleChange
 }: Props): JSX.Element => {
 	const [selectedOption, setSelectedOption] = useState('');
 
@@ -29,16 +29,18 @@ const SearchInput: React.FC<Props> = ({
 
 	const handleOptionSelect = (option: string) => {
 		setSelectedOption(option);
-		onChange(option)
+		if(onHandleChange){
+			onHandleChange(option)	
+		}
 	};
-	
+
 	return (
 		<div className="search-input">
 			<select
 				className="search-input_select"
 				name={name}
 				value={selectedOption}
-				onChange={(e) => handleOptionSelect(e.target.value)}
+				onChange={(e:any) => handleOptionSelect(e.target.value)}
 			>
 				<option value="" disabled>Select {name}</option>
 				{options?.map((option: any) => (

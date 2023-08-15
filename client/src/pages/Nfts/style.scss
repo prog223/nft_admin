@@ -26,7 +26,7 @@
 		}
 
 		&__btns {
-			@include flex(center, end, row, 10px);
+			@include flex(center, flex-end, row, 10px);
 			margin-top: 20px;
 			width: 100%;
 			button {
@@ -68,7 +68,7 @@
 	}
 
 	&__chekbox {
-		@include flex(center, start, row, 20px);
+		@include flex(center, flex-start, row, 20px);
 		flex-wrap: wrap;
 		padding: 20px 30px;
 		background-color: $second-color;
@@ -102,7 +102,7 @@
 		}
 
 		div {
-			@include flex(center, start, row, 7px);
+			@include flex(center, flex-start, row, 7px);
 		}
 	}
 }

@@ -2,9 +2,6 @@
 
 .home-settings {
 	width: 100%;
-	&__container {
-		background-color: $second-color;
-	}
 	&__form {
 		width: 100%;
 		max-width: 700px;
@@ -14,12 +11,54 @@
 		}
 	}
 
-   &__greetings{
-      width: 300px;
+	&__cont {
+		@include flex(flex-start, flex-start, column, 30px);
+		background-color: $second-color;
+		overflow-y: scroll;
+		width: 100%;
+		height: 100%;
+		max-height: calc(100vh - 40vh);
+		padding: 20px 40px;
+	}
 
-      img{
-         width: 100%;
-         object-fit: cover;
-      }
-   }
+	&__title {
+		width: 30%;
+		@include flex(center, flex-start, row, 10px);
+
+		button {
+			@include flex(center, center);
+			background-color: transparent;
+			border: none;
+			cursor: pointer;
+			span {
+				font-size: 36px;
+				color: #fff;
+				color: $main-color;
+			}
+		}
+	}
+
+	&__greetings {
+		// width: 300px;
+		@include flex(center, center);
+
+		width: 100%;
+
+		&__reference {
+			width: 70%;
+			div {
+				@include flex(center, center, column, 20px);
+				overflow: hidden;
+				width: 300px;
+				height: 300px;
+				background-color: rgba(240, 248, 255, 0.233);
+				border-radius: $border-radius;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+		}
+	}
 }
