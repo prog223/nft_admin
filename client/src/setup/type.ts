@@ -46,3 +46,8 @@ export type CollectionT = {
 	image: string;
 	description: string;
 };
+
+export type TabT = {
+	title: string;
+	id:number;
+}
