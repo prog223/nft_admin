@@ -1,0 +1,25 @@
+@use '../../assets/scss/' as *;
+
+.tabs{
+   @include flex(center, center);
+   width: 100%;
+   
+   &_item{
+      @include flex(center, center);
+      width: 100%;
+      border-bottom: 2px solid #ffffff31;
+      padding: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      
+      &:hover{
+         transition: 0.3s;
+         background-color: $second-color;
+      }
+   }
+
+   &_active{
+      border-bottom: 2px solid $main-color;
+   }
+
+}
