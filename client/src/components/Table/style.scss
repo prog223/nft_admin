@@ -11,7 +11,7 @@ table {
       th {
          color: #858584;
          div {
-            @include flex(center, start, row, 5px);
+            @include flex(center, flex-start, row, 5px);
             .thead-btn {
                width: 18px;
                height: 18px;
@@ -41,7 +41,7 @@ table {
       }
 
       .tr-cell{
-         @include flex(center, start, row, 10px)
+         @include flex(center, flex-start, row, 10px)
       }
 
       td,

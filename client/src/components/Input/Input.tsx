@@ -64,7 +64,7 @@ const Input: React.FC<Props> = ({
 					{...rest}
 				/>
 			</div>
-			{!!validationMessage && <div className="inp_error">{errorText}</div>}
+			{/* {validationMessage && <div className="inp_error">{errorText}</div>} */}
 		</div>
 	);
 };

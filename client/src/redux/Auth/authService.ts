@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../api/axios';
-import { LoginT, changeT } from '../../setup/type';
+import { AdminT, LoginT, changeT } from '../../setup/type';
 
 export const login = createAsyncThunk(
 	'login',
@@ -25,6 +25,18 @@ export const changePassword = createAsyncThunk(
 		}
 	}
 );
+
+export const createAdmin = createAsyncThunk(
+	'createAdmin',
+	async (data:AdminT, {rejectWithValue}) =>{
+		try{
+			const response = await axios.post('admin', data);
+			return response;
+		}catch(err: any){
+			return rejectWithValue(err.response);
+		}
+	}
+)
 
 export const logout = createAsyncThunk(
 	'logout',

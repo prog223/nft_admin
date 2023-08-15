@@ -15,7 +15,7 @@
 			@include flex(center, space-between, row, 20px);
 
 			&__item {
-				@include flex(center, start, row, 20px);
+				@include flex(center, flex-start, row, 20px);
 				width: 100%;
 				background-color: $second-color;
 				padding: 30px;

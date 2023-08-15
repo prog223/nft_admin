@@ -111,7 +111,7 @@
 				}
 			}
 			&__tags {
-				@include flex(center, start, row, 10px);
+				@include flex(center, flex-start, row, 10px);
 				flex-wrap: wrap;
 				&__tag {
 					@include flex(center, center, row, 5px);

@@ -35,7 +35,7 @@
 		width: 40%;
 		// padding-top: 40px;
 		align-self: flex-end;
-		@include flex(center, end, row, 20px);
+		@include flex(center, flex-end, row, 20px);
 	}
 
 	&__header {

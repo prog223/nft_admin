@@ -17,12 +17,12 @@ const Topbar: React.FC = (): JSX.Element => {
 			<p>{`${admin.name} ${admin.surname}`}</p>
 			<button
 				className="topbar__btn"
-				onClick={() => navigate('/settings')}
+				onClick={() => navigate('/admin/settings')}
 			>
 				<span className="material-symbols-outlined">settings</span>
 			</button>
 			<div className='topbar__logout'>
-				<Button size='small' onClick={()=>dispatch(logout())}>Logout</Button>
+				<Button size='small' onClick={()=>{dispatch(logout());navigate('/')}}>Logout</Button>
 			</div>
 		</div>
 	);

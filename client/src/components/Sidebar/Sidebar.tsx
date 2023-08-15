@@ -57,7 +57,7 @@ const Sidebar: React.FC<Props> = ({
 					<div className="sidebar__navigation">
 						<ul>
 							<li>
-								<Link to={'/dashboard'}>
+								<Link to={'/admin/dashboard'}>
 									<span className="material-symbols-outlined">
 										dashboard
 									</span>
@@ -71,7 +71,7 @@ const Sidebar: React.FC<Props> = ({
 								</Link>
 							</li>
 							<li>
-								<Link to={'/users'}>
+								<Link to={'/admin/users'}>
 									<span className="material-symbols-outlined">
 										group
 									</span>
@@ -115,7 +115,7 @@ const Sidebar: React.FC<Props> = ({
 								>
 									<li>
 										<Link
-											to={'/create_nft'}
+											to={'/admin/create_nft'}
 											onClick={() => setDropDown(false)}
 										>
 											Create
@@ -123,7 +123,7 @@ const Sidebar: React.FC<Props> = ({
 									</li>
 									<li>
 										<Link
-											to={'/nfts'}
+											to={'/admin/nfts'}
 											onClick={() => setDropDown(false)}
 										>
 											See
@@ -166,7 +166,7 @@ const Sidebar: React.FC<Props> = ({
 								>
 									<li>
 										<Link
-											to={'/create_collection'}
+											to={'/admin/create_collection'}
 											onClick={() => setDropDownCollection(false)}
 										>
 											Create
@@ -174,7 +174,7 @@ const Sidebar: React.FC<Props> = ({
 									</li>
 									<li>
 										<Link
-											to={'/collections'}
+											to={'/admin/collections'}
 											onClick={() => setDropDownCollection(false)}
 										>
 											See
@@ -183,7 +183,7 @@ const Sidebar: React.FC<Props> = ({
 								</ul>
 							</li>
 							<li>
-								<Link to={'/home_settings'}>
+								<Link to={'/admin/home_settings'}>
 									<span className="material-symbols-outlined">
 										settings_applications
 									</span>
@@ -197,7 +197,7 @@ const Sidebar: React.FC<Props> = ({
 								</Link>
 							</li>
 							<li>
-								<Link to={'/'}>
+								<Link to={'/admin'}>
 									<span className="material-symbols-outlined">
 										forum
 									</span>
