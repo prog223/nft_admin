@@ -28,6 +28,7 @@ const authSlice = createSlice({
 			.addCase(login.rejected, (state, action: PayloadAction<any>) => {
 				state.error = action.payload;
 				state.isLoading = false;
+				state.data = {}
 			})
 
 			.addCase(changePassword.pending, (state) => {
@@ -41,6 +42,7 @@ const authSlice = createSlice({
 			.addCase(changePassword.rejected, (state, action: PayloadAction<any>) => {
 				state.error = action.payload;
 				state.isLoading = false;
+				state.data = {}
 			})
 
 			// Logout
@@ -57,6 +59,7 @@ const authSlice = createSlice({
 			.addCase(logout.rejected, (state, action: PayloadAction<any>) => {
 				state.error = action.payload;
 				state.isLoading = false;
+				state.data = {}
 			})
 
 			// Logout
@@ -70,6 +73,7 @@ const authSlice = createSlice({
 			})
 			.addCase(createAdmin.rejected, (state, action: PayloadAction<any>) => {
 				state.error = action.payload;
+				state.data = {}
 				state.isLoading = false;
 			})
 	},

@@ -1,17 +1,23 @@
 @use '../../assets/scss/' as *;
 
 .settings {
+	&_tabs{
+		width: 100%;
+		max-width: 500px;
+	}
+	
 	&_forms {
 		padding-top: 30px;
-		@include flex(flex-start, center, column, 30px);
+		@include flex(center, center, column, 30px);
 
       @include mobile{
          flex-direction: column
       }
 		&_form {
+			padding-top: 30px;
 			@include flex(center, center, column, 10px);
          width: 100%;
-         
+			text-align: center;
 			form {
 				@include flex(center, center, column, 10px);
 				width: 100%;
