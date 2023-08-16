@@ -31,7 +31,7 @@ const ChangePasswordForm: React.FC = () => {
 			).then((res: any) => {
 				// if (!res.error) navigate('/dashboard');
 			});
-	};
+	};	
 	return (
 		<>
 			{isLoading ? (

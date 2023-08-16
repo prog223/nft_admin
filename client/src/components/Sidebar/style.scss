@@ -41,6 +41,10 @@
 		border-radius: 50%;
 		border: none;
 
+		&_open{
+			rotate: 180deg;
+		}
+
 		span {
 			width: 14px;
 			font-size: 16px;

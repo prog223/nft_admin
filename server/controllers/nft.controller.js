@@ -36,7 +36,6 @@ export const createNft = async (req, res, next) => {
 			res.status(201).send('Request successfully created');
 		}
 	} catch (error) {
-		console.log(error);
 		next(error);
 	}
 };
@@ -91,7 +90,6 @@ export const getNfts = async (req, res, next) => {
 
 export const deleteNfts = async (req, res, next) => {
 	try {
-		console.log(req.body);
 		await Nft.deleteMany({ _id: { $in: req.body } });
 		res.status(200).send('deleted');
 	} catch (error) {

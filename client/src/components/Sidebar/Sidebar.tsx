@@ -30,7 +30,7 @@ const Sidebar: React.FC<Props> = ({
 			<div className='sidebar_wrapper'>
 				{!mobile && (
 					<button
-						className="sidebar__toggle-btn"
+						className={classNames("sidebar__toggle-btn", {'sidebar__toggle-btn_open': toggle})}
 						onClick={() => {
 							setToggle(!toggle);
 						}}
