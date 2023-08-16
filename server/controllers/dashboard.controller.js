@@ -10,7 +10,6 @@ export const getInfo = async (req, res, next) => {
 
 		res.status(200).send({ usersCount, nftsCount, collectionsCount });
 	} catch (error) {
-		console.log(error);
       next(error)
    }
 };

@@ -71,7 +71,7 @@ export const logout = async (req, res, next) => {
 
 export const changePassword = async (req, res, next) => {
 	try {
-		console.log(req.admin)
+
 		const admin = await Admin.findOne({ email: req.email });
 		if (!admin) return next(createError(404, 'Admin not found'));
 

@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../setup/hooks/useToast';
 
 interface Props {
 	children: any;
@@ -18,6 +19,7 @@ const instance = axios.create({
 export const AxiosInterceptor: React.FC<Props> = ({ children }: Props) => {
 	const navigate = useNavigate();
 	const [isSet, setIsSet] = useState(false);
+	const toast = useToast();
 
 	useEffect(() => {
 		setIsSet(true);
@@ -29,6 +31,8 @@ export const AxiosInterceptor: React.FC<Props> = ({ children }: Props) => {
 			if (error.response && error.response.status === 401) {
 				navigate('/');
 				localStorage.removeItem('user');
+				const message: any = error.response.data;
+				toast?.open(message);
 			}
 			return Promise.reject(error);
 		};
