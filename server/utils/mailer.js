@@ -30,7 +30,6 @@ export const sendEmail = (to, title, text, from = process.env.contactEmail) => {
 			html: text,
 		},
 		(err, info) => {
-			console.log(info);
 			if (err !== null) {
 				console.log(err);
 			} else {

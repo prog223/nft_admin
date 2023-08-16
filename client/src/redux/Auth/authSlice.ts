@@ -62,7 +62,7 @@ const authSlice = createSlice({
 				state.data = {}
 			})
 
-			// Logout
+		
 			.addCase(createAdmin.pending, (state) => {
 				state.isLoading = true;
 			})
