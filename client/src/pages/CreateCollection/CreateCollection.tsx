@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import SearchInput from '../../components/SearchInput/SearchInput';
-import Input from '../../components/Input/Input';
-import Textarea from '../../components/Textarea/Textarea';
-import Button from '../../components/Button/Button';
+import SearchInput from '../../components/atoms/SearchInput/SearchInput';
+import Input from '../../components/atoms/Input/Input';
+import Textarea from '../../components/atoms/Textarea/Textarea';
+import Button from '../../components/atoms/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUsers } from '../../redux/User/userSlice';
 import { getUsers } from '../../redux/User/userService';

@@ -8,13 +8,13 @@ import {
 	getRequests,
 } from '../../redux/Info/infoService';
 import { selectInfo } from '../../redux/Info/infoSlice';
-import Table from '../../components/Table/Table';
-import TableBody from '../../components/Table/TableBody';
+import Table from '../../components/atoms/Table/Table';
+import TableBody from '../../components/atoms/Table/TableBody';
 import { NftT } from '../../setup/type';
 import { debounce, sortByProperty, upperCase } from '../../setup/utils';
-import TableHeader from '../../components/Table/TableHeader';
+import TableHeader from '../../components/atoms/Table/TableHeader';
 import usePagination from '../../setup/hooks/usePagination';
-import Modal from '../../components/Modal/Modal';
+import Modal from '../../components/molecules/Modal/Modal';
 import DashboardModal from './DashboardModal';
 import useGetAdmin from '../../setup/hooks/useGetAdmin';
 import './style.scss';

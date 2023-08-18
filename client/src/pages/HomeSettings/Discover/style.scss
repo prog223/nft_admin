@@ -1,0 +1,13 @@
+@use '../../../assets/scss/' as *;
+
+.discover {
+	width: 100%;
+	padding: 40px 0;
+	border-bottom: 2px solid $second-color;
+	
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 30px;
+	}
+}

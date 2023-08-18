@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import Input from '../../components/Input/Input';
+import Input from '../../components/atoms/Input/Input';
 import './style.scss';
-import Button from '../../components/Button/Button';
+import Button from '../../components/atoms/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
 import { login } from '../../redux/Auth/authService';
 import { useNavigate } from 'react-router-dom';
 import { selectAuth } from '../../redux/Auth/authSlice';
-import Loading from '../../components/Loading/Loading';
+import Loading from '../../components/atoms/Loading/Loading';
 import { useToast } from '../../setup/hooks/useToast';
 
 const Auth: React.FC = (): JSX.Element => {

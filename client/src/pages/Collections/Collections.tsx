@@ -6,16 +6,16 @@ import {
 	getCollections,
 } from '../../redux/Collection/collectionService';
 import { selectCollections } from '../../redux/Collection/collectionSlice';
-import TableSkeleton from '../../components/TableSkeleton/TableSkeleton';
-import Table from '../../components/Table/Table';
-import TableHeader from '../../components/Table/TableHeader';
-import TableBody from '../../components/Table/TableBody';
-import Pagination from '../../components/Pagination/Pagination';
+import TableSkeleton from '../../components/atoms/TableSkeleton/TableSkeleton';
+import Table from '../../components/atoms/Table/Table';
+import TableHeader from '../../components/atoms/Table/TableHeader';
+import TableBody from '../../components/atoms/Table/TableBody';
+import Pagination from '../../components/atoms/Pagination/Pagination';
 import { CollectionT } from '../../setup/type';
 import { debounce, sortByProperty } from '../../setup/utils';
 import usePagination from '../../setup/hooks/usePagination';
-import Button from '../../components/Button/Button';
-import Modal from '../../components/Modal/Modal';
+import Button from '../../components/atoms/Button/Button';
+import Modal from '../../components/molecules/Modal/Modal';
 import './style.scss';
 
 const Collections: React.FC = (): JSX.Element => {

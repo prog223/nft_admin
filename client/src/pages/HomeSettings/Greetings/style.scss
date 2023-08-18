@@ -1,0 +1,98 @@
+@use '../../../assets/scss/' as *;
+
+.greetings {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   width: 100%;
+   gap: 20px;
+   padding: 20px 30px 80px;
+   border-bottom: 3px solid $second-color;
+
+   @include mobile {
+      grid-template-columns: 1fr;
+      padding: 40px 30px;
+   }
+
+   &__text {
+      @include flex(flex-start, start, column, 20px);
+      width: 90%;
+
+      h1 {
+         font-size: 67px;
+         line-height: 110%;
+
+         @include tablet {
+            font-size: 38px;
+         }
+
+         @include mobile {
+            font-size: 28px;
+         }
+      }
+
+      p {
+         font-size: 22px;
+         line-height: 160%;
+
+         @include tablet {
+            font-size: 16px;
+         }
+      }
+   }
+
+   &__start {
+      @include flex(flex-start, start, column, 20px);
+      height: 100%;
+
+      &__btn {
+         width: 224px;
+
+         @include mobile {
+            width: 100%;
+         }
+      }
+
+      @include mobile {
+         grid-row-start: 3;
+         grid-row-end: 4;
+         grid-column-start: 1;
+      }
+
+      &__inf {
+         @include flex(center, space-between, row, 10px);
+         width: 100%;
+
+         &__item {
+            width: 100%;
+
+            :first-child {
+               font-weight: 700;
+               font-size: 28px;
+               font-family: $font-family-second;
+            }
+
+            @include tablet {
+               font-size: 16px;
+
+               :first-child {
+                  font-size: 22px;
+               }
+            }
+         }
+      }
+   }
+
+   &__box {
+      max-width: 510px;
+      max-height: 510px;
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-start: 2;
+
+      @include mobile {
+         grid-row-start: 2;
+         grid-row-end: 3;
+         grid-column-start: 1;
+      }
+   }
+}

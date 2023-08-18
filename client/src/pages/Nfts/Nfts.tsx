@@ -6,14 +6,14 @@ import { NftT } from '../../setup/type';
 import { debounce, sortByProperty, upperCase } from '../../setup/utils';
 import { deleteNfts, getNfts } from '../../redux/Nft/nftService';
 import { AppDispatch } from '../../redux/store';
-import Table from '../../components/Table/Table';
-import TableHeader from '../../components/Table/TableHeader';
-import TableBody from '../../components/Table/TableBody';
-import Button from '../../components/Button/Button';
-import Pagination from '../../components/Pagination/Pagination';
+import Table from '../../components/atoms/Table/Table';
+import TableHeader from '../../components/atoms/Table/TableHeader';
+import TableBody from '../../components/atoms/Table/TableBody';
+import Button from '../../components/atoms/Button/Button';
+import Pagination from '../../components/atoms/Pagination/Pagination';
 import usePagination from '../../setup/hooks/usePagination';
-import TableSkeleton from '../../components/TableSkeleton/TableSkeleton';
-import Modal from '../../components/Modal/Modal';
+import TableSkeleton from '../../components/atoms/TableSkeleton/TableSkeleton';
+import Modal from '../../components/molecules/Modal/Modal';
 import './style.scss';
 
 const Nfts: React.FC = (): JSX.Element => {

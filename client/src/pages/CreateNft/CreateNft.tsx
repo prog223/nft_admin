@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
-import Input from '../../components/Input/Input';
-import Textarea from '../../components/Textarea/Textarea';
-import Button from '../../components/Button/Button';
+import Input from '../../components/atoms/Input/Input';
+import Textarea from '../../components/atoms/Textarea/Textarea';
+import Button from '../../components/atoms/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
 import { getUsers } from '../../redux/User/userService';
@@ -9,7 +9,7 @@ import { selectUsers } from '../../redux/User/userSlice';
 import { getCollections } from '../../redux/Collection/collectionService';
 import { selectCollections } from '../../redux/Collection/collectionSlice';
 import './style.scss';
-import SearchInput from '../../components/SearchInput/SearchInput';
+import SearchInput from '../../components/atoms/SearchInput/SearchInput';
 import useTomorrowDate from '../../setup/hooks/useTomorrowDate';
 import { createNft } from '../../redux/Nft/nftService';
 

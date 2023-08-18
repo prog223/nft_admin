@@ -1,0 +1,33 @@
+@use '../../../assets/scss/' as *;
+
+.search-input {
+	@include flex(center, center);
+	width: 100%;
+	
+	&_select {
+		width: 30%;
+      height: 100%;
+		border: 1px solid $inp-color;
+		background-color: $inp-color;
+		color: #fff;
+		padding: 10px 20px;
+		border-top-left-radius: $border-radius;
+		border-bottom-left-radius: $border-radius;
+      cursor: pointer;
+	}
+
+	&_input {
+		width: 70%;
+      height: 100%;
+		border: none;
+      font-size: 16px;
+		background-color: $inp-color;
+		color: #fff;
+		padding: 10px 20px;
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      &::placeholder {
+         color: #ffffffbe;
+      }
+	}
+}

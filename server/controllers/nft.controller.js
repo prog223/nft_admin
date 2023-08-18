@@ -1,6 +1,7 @@
 import Nft from '../models/nft.model.js';
 import Request from '../models/request.model.js';
 import { v2 as cloudinary } from 'cloudinary';
+import { createError } from '../utils/createError.js';
 
 // cloudinary.config({
 //   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -18,7 +19,7 @@ export const createNft = async (req, res, next) => {
 		const result = await cloudinary.uploader.upload(req.body.image, {
 			folder: 'nft',
 		});
-		
+
 		if (req.isSuper) {
 			const newNft = new Nft({
 				...req.body,
@@ -37,6 +38,19 @@ export const createNft = async (req, res, next) => {
 		}
 	} catch (error) {
 		next(error);
+	}
+};
+
+export const getNft = async (req, res, next) => {
+	try {
+		const nft = await Nft.findOne({ _id: req.params.id })
+			.populate('creator', ['username'])
+			.exec();
+		if (!nft) return next(createError(404, 'Nft not found'));
+
+		res.status(200).send(nft);
+	} catch (e) {
+		next(e);
 	}
 };
 
@@ -70,7 +84,7 @@ export const getNfts = async (req, res, next) => {
 				description: true,
 				category: true,
 				expirationDate: true,
-				image: true
+				image: true,
 			})
 			.exec();
 
