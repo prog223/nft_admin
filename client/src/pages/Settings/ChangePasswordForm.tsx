@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from '../../redux/store';
 import { changePassword } from '../../redux/Auth/authService';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
+import Input from '../../components/atoms/Input/Input';
+import Button from '../../components/atoms/Button/Button';
 import authSlice, { selectAuth } from '../../redux/Auth/authSlice';
-import Loading from '../../components/Loading/Loading';
+import Loading from '../../components/atoms/Loading/Loading';
 
 const ChangePasswordForm: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();

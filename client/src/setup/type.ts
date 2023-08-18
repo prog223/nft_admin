@@ -45,6 +45,7 @@ export type CollectionT = {
 	creator: string;
 	image: string;
 	description: string;
+	nfts?: NftT[];
 };
 
 export type TabT = {

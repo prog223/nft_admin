@@ -1,6 +1,6 @@
 import { useRoutes } from "react-router-dom";
 import Dashboard from "../../pages/Dashboard/Dashboard";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../components/atoms/Layout/Layout";
 import Users from "../../pages/Users/Users";
 import Nfts from "../../pages/Nfts/Nfts";
 import Collections from "../../pages/Collections/Collections";

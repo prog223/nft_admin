@@ -1,0 +1,126 @@
+@use '../../../assets/scss/' as *;
+
+.sidebar {
+	height: 100vh;
+	width: 100%;
+	transition: all 0.5s;
+	background-color: $second-color;
+	padding: 20px 10px 10px 20px;
+	position: relative;
+
+	@include tablet {
+		padding: 20px 10px;
+	}
+
+	&_wrapper{
+		overflow: hidden
+	}
+
+	&__header {
+		@include flex(center, space-between);
+		height: 46px;
+
+		&__span{
+			background-color: $main-color;
+			padding: 5px;
+			border-radius: $border-radius;
+			font-size: 12px;
+		}
+	}
+
+	&__toggle-btn {
+		@include flex(center, center);
+		transition: all 0.3s;
+		position: absolute;
+		right: -10px;
+		top: 30px;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		z-index: 100;
+		border-radius: 50%;
+		border: none;
+
+		&_open{
+			rotate: 180deg;
+		}
+
+		span {
+			width: 14px;
+			font-size: 16px;
+			color: $body-bg;
+		}
+	}
+
+	&__navigation {
+		padding: 30px 0;
+
+		ul {
+			@include flex(flex-start, flex-start, column, 20px);
+		
+			li {
+				a {
+					@include flex(center, center, row, 10px);
+					color: #fff;
+					width: 100%;
+				}
+			}
+
+			.dropdown_link{
+				width: 100%;
+				// position: relative;
+				div{
+					cursor: pointer;
+					@include flex(center, flex-start, row, 10px);
+				}
+			}
+
+			.drop_down {
+				transition: all 0.5s;
+				height: 0;
+				overflow: hidden;
+				width: 100%;
+				background-color: rgba(0, 0, 0, 0.253);
+				padding: 0 10px;
+				z-index: 100;
+				
+				&_active{
+					padding: 10px;
+					height: 80px;
+				}
+
+				&_mobile{
+					position: absolute;
+					left: 50px;
+					width: 100px;
+					margin-top: -30px;
+					border-radius: 5px;
+				}
+			}
+		}
+	}
+}
+
+.opacity {
+	transition: all 0.2s;
+	overflow: hidden;
+	width: 100%;
+	min-width: 143px;
+}
+
+.header_opacity {
+	opacity: 0;
+}
+
+.active {
+	padding: 20px;
+	.sidebar__toggle-btn {
+		right: -20px;
+	}
+}
+
+.opacity_active {
+	opacity: 1;
+	display: block;
+	width: 100%;
+}
