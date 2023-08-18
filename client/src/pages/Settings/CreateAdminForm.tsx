@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
-import Loading from '../../components/Loading/Loading';
+import Input from '../../components/atoms/Input/Input';
+import Button from '../../components/atoms/Button/Button';
+import Loading from '../../components/atoms/Loading/Loading';
 import { createAdmin } from '../../redux/Auth/authService';
 import { selectAuth } from '../../redux/Auth/authSlice';
 

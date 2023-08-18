@@ -8,33 +8,44 @@ export const createNft = createAsyncThunk(
 		try {
 			const response = await axios.post('nft', data);
 			return response;
-		} catch (err:any) {
-			return rejectWithValue(err.response)
+		} catch (err: any) {
+			return rejectWithValue(err.response);
 		}
 	}
 );
 
 export const getNfts = createAsyncThunk(
 	'getNfts',
-	async (params:any, { rejectWithValue }) => {
+	async (params: any, { rejectWithValue }) => {
 		try {
 			const response = await axios.get('nft', { params });
 			return response;
-		} catch (err:any) {
-			return rejectWithValue(err.response)
+		} catch (err: any) {
+			return rejectWithValue(err.response);
 		}
 	}
 );
 
+export const getNft = createAsyncThunk(
+	'getNft',
+	async (id: string, { rejectWithValue }) => {
+		try {
+			const response = await axios.get(`nft/${id}`);
+			return response;
+		} catch (err: any) {
+			return rejectWithValue(err.response);
+		}
+	}
+);
 
 export const deleteNfts = createAsyncThunk(
 	'deleteNfts',
-	async (data:any, {rejectWithValue}) =>{
-		try{
+	async (data: any, { rejectWithValue }) => {
+		try {
 			const response = await axios.post('nft/delete', data);
-			return response
-		}catch(err:any){
-			return rejectWithValue(err.response)
+			return response;
+		} catch (err: any) {
+			return rejectWithValue(err.response);
 		}
 	}
-)
+);

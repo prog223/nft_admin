@@ -1,0 +1,19 @@
+@use '../../../assets/scss/' as *;
+
+.select-nft {
+	@include flex(center, center, column, 20px);
+	width: 100%;
+	max-width: 450px;
+	&_search {
+		@include flex(center, center, row, 10px);
+
+		span {
+			font-size: 35px;
+			cursor: pointer;
+		}
+	}
+
+	&_nft {
+		width: 100%;
+	}
+}

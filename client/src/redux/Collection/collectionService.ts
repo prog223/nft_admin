@@ -14,6 +14,18 @@ export const getCollections = createAsyncThunk(
 	}
 );
 
+export const getCollection = createAsyncThunk(
+	'getCollection',
+	async (id: string, { rejectWithValue }) => {
+		try {
+			const response = await axios.get(`collection/${id}`);
+			return response;
+		} catch (err: any) {
+			return rejectWithValue(err);
+		}
+	}
+);
+
 export const createCollection = createAsyncThunk(
 	'createCollection',
 	async (data: CollectionT, { rejectWithValue }) => {
@@ -26,7 +38,7 @@ export const createCollection = createAsyncThunk(
 	}
 );
 
-export const deleteCollections =  createAsyncThunk(
+export const deleteCollections = createAsyncThunk(
 	'deleteCollections',
 	async (data: any, { rejectWithValue }) => {
 		try {

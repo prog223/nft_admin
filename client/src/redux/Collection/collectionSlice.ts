@@ -1,11 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { createCollection, deleteCollections, getCollections } from './collectionService';
+import {
+	createCollection,
+	deleteCollections,
+	getCollection,
+	getCollections,
+} from './collectionService';
 
-const initialState: { data: any; isLoading: boolean; error: any } = {
+const initialState: {
+	data: any;
+	isLoading: boolean;
+	error: any;
+	collection: { data: any; isLoading: boolean; error: any };
+} = {
 	data: null,
 	isLoading: false,
 	error: null,
+	collection: {
+		data: null,
+		isLoading: false,
+		error: null,
+	},
 };
 
 const collectionSlice = createSlice({
@@ -30,6 +45,25 @@ const collectionSlice = createSlice({
 				(state, action: PayloadAction<any>) => {
 					state.error = action.payload;
 					state.isLoading = false;
+				}
+			)
+
+			.addCase(getCollection.pending, (state) => {
+				state.collection.isLoading = true;
+			})
+			.addCase(
+				getCollection.fulfilled,
+				(state, action: PayloadAction<any>) => {
+					state.collection.data = action.payload.data;
+					state.collection.isLoading = false;
+					state.collection.error = null;
+				}
+			)
+			.addCase(
+				getCollection.rejected,
+				(state, action: PayloadAction<any>) => {
+					state.collection.error = action.payload;
+					state.collection.isLoading = false;
 				}
 			)
 
