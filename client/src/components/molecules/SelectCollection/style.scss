@@ -1,0 +1,57 @@
+@use '../../../assets/scss' as *;
+
+.collections {
+	@include flex(flex-start, start, column, 15px);
+	width: 100%;
+	// max-width: 330px;
+
+	.flex {
+		@include flex(default, start, column, 10px);
+		gap: 10px;
+	}
+
+	&__title {
+		font-size: 22px;
+		font-weight: 600;
+	}
+
+	&__user {
+		@include flex(center, start, row, 12px);
+	}
+
+	&__grid {
+		display: grid;
+		width: 100%;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: 330px 100px;		
+		gap: 15px;
+
+		:first-child {
+			grid-column-start: 1;
+			grid-column-end: 4;
+			height: 100%;
+		}
+		&__item {
+			width: 100%;
+			height: 100px;
+			border-radius: $border-radius;
+			overflow: hidden;
+
+			img {
+				object-fit: cover;
+				width: 100%;
+				height: 100px;
+			}
+
+			&:last-child {
+				@include flex(center, center);
+				background-color: $main-color;
+				font-family: $font-family-second;
+				font-weight: 700;
+				font-size: 22px;
+				line-height: 160%;
+				color: #fff;
+			}
+		}
+	}
+}
