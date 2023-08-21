@@ -3,6 +3,8 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import verifyToken from './middleware/jwt.js';
 
 import adminRoute from './routes/admin.route.js';
 import nftRoute from './routes/nft.route.js';
@@ -10,8 +12,7 @@ import userRoute from './routes/user.route.js';
 import collectionRoute from './routes/collection.route.js';
 import dashboardRoute from './routes/dashboard.route.js';
 import requestRoute from './routes/request.route.js';
-import bodyParser from 'body-parser';
-import verifyToken from './middleware/jwt.js';
+import contentRoute from './routes/content.route.js'
 
 const app = express();
 dotenv.config();
@@ -27,7 +28,7 @@ try {
 
 app.use(
 	cors({
-		origin: 'http://localhost:3000',
+		origin: 'http://localhost:3001',
 		credentials: true,
 	})
 );
@@ -40,6 +41,7 @@ app.use('/api/user', verifyToken, userRoute);
 app.use('/api/collection', verifyToken, collectionRoute);
 app.use('/api/dashboard', verifyToken, dashboardRoute);
 app.use('/api/request', verifyToken, requestRoute);
+app.use('/api/content', verifyToken, contentRoute)
 
 app.use((err, req, res, next) => {
 	const errorStatus = err.status || 500;

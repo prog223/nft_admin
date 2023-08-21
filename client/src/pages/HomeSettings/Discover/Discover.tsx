@@ -1,10 +1,29 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ReactComponent as Eye } from '../../../assets/images/Eye.svg';
-import './style.scss';
 import SelectNft from '../../../components/molecules/SelectNft/SelectNft';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContent } from '../../../redux/Content/contentSlice';
+import './style.scss';
+import { AppDispatch } from '../../../redux/store';
+import { updateContent } from '../../../redux/Content/contentService';
 
 const Discover: React.FC = (): JSX.Element => {
+	const { data } = useSelector(selectContent);
+	const dispatch = useDispatch<AppDispatch>();
+	const findByPosition = (number: number) => {
+		const find = data?.discover.find((e: any) => e.position == number);
+		return find;
+	};
+
+	const handleClick = (nft: any) => {
+		if (nft.selected && nft.id !== nft.selected) {
+			dispatch(
+				updateContent({
+					discover: { _id: nft._id, nft: nft.selected },
+				})
+			);
+		}
+	};
+
 	return (
 		<div className="discover container section">
 			<div className="section-title">
@@ -13,9 +32,21 @@ const Discover: React.FC = (): JSX.Element => {
 			</div>
 
 			<div className="discover__grid">
-				<SelectNft size='sm'/>
-				<SelectNft size='sm'/>
-				<SelectNft size='sm'/>
+				<SelectNft
+					size="sm"
+					content={findByPosition(1)}
+					handleClick={handleClick}
+				/>
+				<SelectNft
+					size="sm"
+					content={findByPosition(2)}
+					handleClick={handleClick}
+				/>
+				<SelectNft
+					size="sm"
+					content={findByPosition(3)}
+					handleClick={handleClick}
+				/>
 			</div>
 		</div>
 	);
