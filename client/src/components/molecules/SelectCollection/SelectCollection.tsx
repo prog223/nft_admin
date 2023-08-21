@@ -7,12 +7,24 @@ import './style.scss';
 import { selectCollections } from '../../../redux/Collection/collectionSlice';
 import { CollectionT } from '../../../setup/type';
 import CollectionSkeleton from '../../atoms/CollectionSkeleton/CollectionSkeleton';
+import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+import { selectContent } from '../../../redux/Content/contentSlice';
 
-const SelectCollection: React.FC = (): JSX.Element => {
+interface Props {
+	content?: any;
+	handleClick: (content: any) => void;
+}
+
+const SelectCollection: React.FC<Props> = ({
+	content,
+	handleClick,
+}): JSX.Element => {
 	const [selected, setSelected] = useState<string>('');
 	const [collections, setCollections] = useState<CollectionT[] | null>(null);
 	const [collection, setCollection] = useState<CollectionT | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const { isLoading: contentIsLoading } = useSelector(selectContent);
 
 	const fetchData = async (search: any = '') => {
 		try {
@@ -32,7 +44,6 @@ const SelectCollection: React.FC = (): JSX.Element => {
 				setCollection(response.data);
 			}
 		} catch (err) {
-			console.log(err);
 			setIsLoading(false);
 		}
 	};
@@ -55,33 +66,69 @@ const SelectCollection: React.FC = (): JSX.Element => {
 					fetch={fetchData}
 					onHandleChange={(collection: any) => setSelected(collection)}
 				/>
-				<span className="material-symbols-outlined">add_circle</span>
+				<span
+					className={classNames('material-symbols-outlined', {
+						disable: content?.collection?._id === selected || !selected,
+					})}
+					onClick={() => handleClick({ selected, _id: content?._id, id: content?.collection?._id })}
+				>
+					add_circle
+				</span>
 			</div>
 			<div className="collections">
-				{isLoading? <CollectionSkeleton/> : <>
-				
-				<div className="collections__grid">
-					{collection?.nfts?.map((e: any) => (
-						<div
-							className="collections__grid__item"
-							key={e._id}
-						>
-							<img
-								src={e.image}
-								alt=""
-							/>
-						</div>
-					))}
+				{isLoading || contentIsLoading ? (
+					<CollectionSkeleton />
+				) : selected ? (
+					<>
+						<div className="collections__grid">
+							{collection?.nfts?.map((e: any) => (
+								<div
+									className="collections__grid__item"
+									key={e._id}
+								>
+									<img
+										src={e.image}
+										alt=""
+									/>
+								</div>
+							))}
 
-					<div className="collections__grid__item">1035+</div>
-				</div>
-				<div className="flex">
-					<p className="collections__title">{collection?.name}</p>
-					<div className="collections__user">
-						<User user={collection?.creator} />
-					</div>
-				</div>
-				</>}
+							<div className="collections__grid__item">1035+</div>
+						</div>
+						<div className="flex">
+							<p className="collections__title">{collection?.name}</p>
+							<div className="collections__user">
+								<User user={collection?.creator} />
+							</div>
+						</div>
+					</>
+				) : (
+					<>
+						<div className="collections__grid">
+							{content?.collection?.nfts?.map((e: any) => (
+								<div
+									className="collections__grid__item"
+									key={e._id}
+								>
+									<img
+										src={e.image}
+										alt=""
+									/>
+								</div>
+							))}
+
+							<div className="collections__grid__item">1035+</div>
+						</div>
+						<div className="flex">
+							<p className="collections__title">
+								{content?.collection?.name}
+							</p>
+							<div className="collections__user">
+								<User user={content?.collection?.creator} />
+							</div>
+						</div>
+					</>
+				)}
 			</div>
 		</div>
 	);

@@ -6,26 +6,54 @@ import { getNft, getNfts } from '../../../redux/Nft/nftService';
 import { selectNfts } from '../../../redux/Nft/nftSlice';
 import Box from '../../atoms/Box/Box';
 import './style.scss';
+import { NftT } from '../../../setup/type';
+import axios from '../../../api/axios';
+import BoxSkeleton from '../../atoms/BoxSkeleton/BoxSkeleton';
+import { selectContent } from '../../../redux/Content/contentSlice';
+import classNames from 'classnames';
 
 interface Props {
 	size?: 'sm' | 'bg';
+	content?: { _id?: string; nft: NftT };
+	handleClick: (data: any) => void;
 }
-	
-const SelectNft: React.FC<Props> = ({ size }) => {
+
+const SelectNft: React.FC<Props> = ({ size, content, handleClick }) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const { data, nft } = useSelector(selectNfts);
+	const [nftData, setNftData] = useState<NftT | null>(null);
+	const [selected, setSelected] = useState<any>('');
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const { isLoading: contentIsLoading } = useSelector(selectContent);
+
 	const fetchData = (search: string = '') => {
 		dispatch(getNfts({ search }));
 	};
-	const [selected, setSelected] = useState<any>('');
+
+	const fetchNft = async () => {
+		try {
+			setIsLoading(true);
+			const response = await axios.get(`nft/${selected}`);
+			if (response.data) {
+				setIsLoading(false);
+				setNftData(response.data);
+			}
+		} catch (err) {
+			setIsLoading(false);
+		}
+	};
 
 	useEffect(() => {
 		fetchData();
 	}, []);
 
 	useEffect(() => {
-		if (selected) dispatch(getNft(selected));
+		if (selected) {
+			dispatch(getNft(selected));
+			fetchNft();
+		}
 	}, [selected]);
+	
 
 	return (
 		<div className="select-nft">
@@ -37,16 +65,35 @@ const SelectNft: React.FC<Props> = ({ size }) => {
 					fetch={fetchData}
 					onHandleChange={(nft: any) => setSelected(nft)}
 				/>
-
-				<span className="material-symbols-outlined">add_circle</span>
+				<span
+					className={classNames('material-symbols-outlined', {
+						disable: content?.nft?._id === selected || !selected,
+					})}
+					onClick={() => handleClick({ selected, _id: content?._id, id: content?.nft?._id})}
+				>
+					add_circle
+				</span>
 			</div>
 			<div className="select-nft_nft">
-				<Box
-					img={nft?.data?.image}
-					title={nft?.data?.name}
-					size={size}
-					user={nft?.data?.creator}
-				/>
+				{isLoading || contentIsLoading ? (
+					<>
+						<BoxSkeleton count={1} />
+					</>
+				) : !selected && content ? (
+					<Box
+						img={content?.nft?.image}
+						title={content?.nft?.name}
+						size={size}
+						user={content?.nft?.creator}
+					/>
+				) : (
+					<Box
+						img={nftData?.image}
+						title={nftData?.name}
+						size={size}
+						user={nftData?.creator}
+					/>
+				)}
 			</div>
 		</div>
 	);

@@ -7,8 +7,8 @@ import User from '../User/User';
 interface Props {
 	variant?: 'default' | 'icon';
 	size?: 'sm' | 'bg';
-	img: string;
-	title: string;
+	img?: string;
+	title?: string;
 	user?: UserT;
 	icon?: React.ReactNode;
 	price?: number;
