@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import './style.scss';
+import React from 'react';
 import SelectCollection from '../../../components/molecules/SelectCollection/SelectCollection';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContent } from '../../../redux/Content/contentSlice';
 import { AppDispatch } from '../../../redux/store';
 import { updateContent } from '../../../redux/Content/contentService';
+import './style.scss';
 
 const Trending: React.FC = (): JSX.Element => {
 	const { data } = useSelector(selectContent);
@@ -16,7 +16,7 @@ const Trending: React.FC = (): JSX.Element => {
 	};
 
 	const handleClick = (content: any) => {
-		
+		if(content.selected)
 		dispatch(
 			updateContent({
 				trending: { _id: content._id, collection: content.selected },

@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import './style.scss';
 import { UserT } from '../../../setup/type';
 import User from '../User/User';	
+import './style.scss';
 
 interface Props {
 	variant?: 'default' | 'icon';

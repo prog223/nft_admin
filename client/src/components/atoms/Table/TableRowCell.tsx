@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import { formatDate } from '../../../setup/utils';
 
 interface Props {
 	item: any;
@@ -19,6 +19,12 @@ const TableRowCell: React.FC<Props> = ({
 					</div>
 				)}
 
+				{column.key === 'image' && item.image && (
+					<div>
+						<img src={item.image}></img>
+					</div>
+				)}
+
 				{column.key === 'verified' && (
 					<>
 						{item.verified ? (
@@ -29,11 +35,19 @@ const TableRowCell: React.FC<Props> = ({
 					</>
 				)}
 
-				{column.render
-					? column.render(column, item)
-					: item[column.key]?._id
-					? item[column.key].name || item[column.key].username
-					: item[column.key]}
+				{column.key == 'expirationDate' && (
+					<>{formatDate(new Date(item.expirationDate))}</>
+				)}
+
+				{column.key !== 'image' && column.key !== 'expirationDate'&& (
+					<>
+						{column.render
+							? column.render(column, item)
+							: item[column.key]?._id
+							? item[column.key].name || item[column.key].username
+							: item[column.key]}
+					</>
+				)}
 			</div>
 			{(column.key === 'total_sales' || column.key === 'price') && ' ETH'}
 		</td>

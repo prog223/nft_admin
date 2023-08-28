@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './style.scss';
 import Greetings from './Greetings/Greetings';
 import Trending from './Trending/Trending';
 import Discover from './Discover/Discover';
@@ -7,6 +6,7 @@ import Nft from './Nft/Nft';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
 import { getContent } from '../../redux/Content/contentService';
+import './style.scss';
 
 const HomeSettings: React.FC = (): JSX.Element => {
 	const dispatch = useDispatch<AppDispatch>();

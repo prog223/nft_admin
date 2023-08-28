@@ -42,7 +42,7 @@ export const login = async (req, res, next) => {
 			{
 				id: admin._id,
 				isSuper: admin.isSuper,
-				email: admin.email
+				email: admin.email,
 			},
 			process.env.JWT_KEY
 		);
@@ -71,7 +71,6 @@ export const logout = async (req, res, next) => {
 
 export const changePassword = async (req, res, next) => {
 	try {
-
 		const admin = await Admin.findOne({ email: req.email });
 		if (!admin) return next(createError(404, 'Admin not found'));
 
@@ -87,8 +86,17 @@ export const changePassword = async (req, res, next) => {
 		await admin.save();
 
 		res.status(200).send('Password successfully changed');
-
 	} catch (error) {
 		next(error);
+	}
+};
+
+export const getContacts = async (req, res, next) => {
+	try {
+		const contacts = await Admin.find({ _id: { $ne: req.userId } }).select(['name', 'surname'])
+		if(!contacts.length) return next(createError(404, 'Contacts not found'))
+		res.status(200).send(contacts)
+	} catch (err) {
+		next(err);
 	}
 };

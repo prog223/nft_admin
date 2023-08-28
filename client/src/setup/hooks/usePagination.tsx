@@ -7,7 +7,6 @@ const usePagination = (perPage = 6, defaultPage = 1) => {
 	const itemsPerPage = Number(searchParams.get('count')) || 6
 
 	const updatePage = (newPage: number) => {
-		console.log('update page');
 		searchParams.set('page', newPage.toString());
 		setSearchParams(searchParams);
 	};

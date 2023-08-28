@@ -11,7 +11,6 @@ import Table from '../../components/atoms/Table/Table';
 import TableHeader from '../../components/atoms/Table/TableHeader';
 import TableBody from '../../components/atoms/Table/TableBody';
 import Pagination from '../../components/atoms/Pagination/Pagination';
-import { CollectionT } from '../../setup/type';
 import { debounce, sortByProperty } from '../../setup/utils';
 import usePagination from '../../setup/hooks/usePagination';
 import Button from '../../components/atoms/Button/Button';
@@ -23,7 +22,7 @@ const Collections: React.FC = (): JSX.Element => {
 	const dispatch = useDispatch<AppDispatch>();
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [hideArr, setHideArr] = useState<Array<string | number>>([]);
-	const [arr, setData] = useState<Array<CollectionT>>(data?.collections);
+	const [arr, setData] = useState<Array<any>>(data?.collections);
 	const { currentPage, itemsPerPage } = usePagination();
 
 	const fetchData = (search: string = '') => {
@@ -46,11 +45,17 @@ const Collections: React.FC = (): JSX.Element => {
 	}, []);
 
 	useEffect(() => {
-		setData(data?.collections);
+		setData(
+			data?.collections.map((e: any) => ({
+				...e,
+				creator: e.creator.username,
+			}))
+		);
 	}, [data?.collections]);
 
 	const filter = (value: string, bool: boolean) => {
 		const sortedData = [...arr].sort(sortByProperty(value, bool));
+
 		setData([...sortedData]);
 	};
 
@@ -117,7 +122,7 @@ const Collections: React.FC = (): JSX.Element => {
 					<div className="collection__table">
 						<div className="nfts__table__wrap">
 							{isLoading ? (
-								<TableSkeleton count={9} />
+								<TableSkeleton count={6} />
 							) : (
 								<>
 									<Table>

@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Eye } from '../../../assets/images/Eye.svg';
-import NFT from '../../../assets/images/NFT.png';
-import './style.scss';
 import SearchInput from '../../../components/atoms/SearchInput/SearchInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../../redux/store';
@@ -13,6 +9,7 @@ import { selectContent } from '../../../redux/Content/contentSlice';
 import axios from '../../../api/axios';
 import { NftT } from '../../../setup/type';
 import { updateContent } from '../../../redux/Content/contentService';
+import './style.scss';
 
 const Nft: React.FC = (): JSX.Element => {
 	const dispatch = useDispatch<AppDispatch>();

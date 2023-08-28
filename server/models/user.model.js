@@ -53,6 +53,6 @@ userSchema.pre(
 		await Nft.deleteMany({ creator: { $in: users } });
 		next();
 	}
-);
+);	
 
 export default mongoose.model('User', userSchema);

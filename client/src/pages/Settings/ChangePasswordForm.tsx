@@ -5,12 +5,12 @@ import { AppDispatch } from '../../redux/store';
 import { changePassword } from '../../redux/Auth/authService';
 import Input from '../../components/atoms/Input/Input';
 import Button from '../../components/atoms/Button/Button';
-import authSlice, { selectAuth } from '../../redux/Auth/authSlice';
+import { selectAuth } from '../../redux/Auth/authSlice';
 import Loading from '../../components/atoms/Loading/Loading';
 
 const ChangePasswordForm: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
-	const { data, isLoading, error } = useSelector(selectAuth);
+	const { isLoading, error } = useSelector(selectAuth);
 	const navigate = useNavigate();
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
@@ -29,7 +29,7 @@ const ChangePasswordForm: React.FC = () => {
 					confirm_password: formElement.confirm_password.value,
 				})
 			).then((res: any) => {
-				// if (!res.error) navigate('/dashboard');
+				if (!res.error) navigate('/admin/dashboard');
 			});
 	};	
 	return (

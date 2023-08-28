@@ -1,6 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import Input from '../Input/Input';
-import classNames from 'classnames';
 import { debounce } from '../../../setup/utils';
 import './style.scss';
 

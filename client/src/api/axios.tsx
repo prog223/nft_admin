@@ -34,6 +34,7 @@ export const AxiosInterceptor: React.FC<Props> = ({ children }: Props) => {
 				const message: any = error.response.data;
 				toast?.open(message);
 			}
+			
 			return Promise.reject(error);
 		};
 

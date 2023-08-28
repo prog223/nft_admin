@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './style.scss';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import useMediaQuery from '../../../setup/hooks/useMeduaQuery';
 import useGetAdmin from '../../../setup/hooks/useGetAdmin';
+import './style.scss';
 
 interface Props {
 	toggle: boolean;
@@ -197,7 +197,7 @@ const Sidebar: React.FC<Props> = ({
 								</Link>
 							</li>
 							<li>
-								<Link to={'/admin'}>
+								<Link to={'/admin/chat'}>
 									<span className="material-symbols-outlined">
 										forum
 									</span>

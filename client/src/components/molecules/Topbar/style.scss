@@ -7,6 +7,10 @@
 	padding: 15px 20px;
 	box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.452);
 
+	@include mobile{
+		padding: 10px;
+	}
+
 	&__btn {
 		@include flex(center, center);
 		background-color: transparent;

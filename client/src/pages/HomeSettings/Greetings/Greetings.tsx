@@ -1,18 +1,17 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './style.scss';
 import Button from '../../../components/atoms/Button/Button';
 import SelectNft from '../../../components/molecules/SelectNft/SelectNft';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContent } from '../../../redux/Content/contentSlice';
 import { updateContent } from '../../../redux/Content/contentService';
 import { AppDispatch } from '../../../redux/store';
+import './style.scss';
 
 const Greetings: React.FC = (): JSX.Element => {
 	const { data, isLoading, error } = useSelector(selectContent);
 	const dispatch = useDispatch<AppDispatch>();
 	const handleClick = (content: any) => {
-		if (content.selected && data.greetings._id !== content.selected) {
+		if (content.selected && data?.greetings?._id !== content.selected) {
 			dispatch(updateContent({ greetings: content.selected }));
 		}
 	};

@@ -11,7 +11,7 @@ import { selectAuth } from '../../redux/Auth/authSlice';
 const CreateAdminForm: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
-	const { data, isLoading, error } = useSelector(selectAuth);
+	const { isLoading } = useSelector(selectAuth);
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 

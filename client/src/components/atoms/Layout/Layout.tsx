@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import Topbar from '../../molecules/Topbar/Topbar';
-import './style.scss';
 import classNames from 'classnames';
+import './style.scss';
 
 const Layout: React.FC = (): JSX.Element => {
 	const [toggle, setToggle] = useState<boolean>(true);
@@ -26,7 +26,7 @@ const Layout: React.FC = (): JSX.Element => {
 				})}
 			>
 				<Topbar />
-				<div style={{ padding: '30px 30px 0 30px', width: '100%' }}>
+				<div className='container-default'>
 					<Outlet />
 				</div>
 			</div>

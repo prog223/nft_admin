@@ -11,8 +11,9 @@
 		grid-template-columns: repeat(3, 1fr);
 		gap: 30px;
 
-		@include mobile{
+		@include tablet{
 			grid-template-columns: repeat(1, 1fr);
+			justify-items: center;
 		}
 	}
 }

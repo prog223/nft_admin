@@ -2,9 +2,9 @@ import React from 'react';
 import SelectNft from '../../../components/molecules/SelectNft/SelectNft';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContent } from '../../../redux/Content/contentSlice';
-import './style.scss';
 import { AppDispatch } from '../../../redux/store';
 import { updateContent } from '../../../redux/Content/contentService';
+import './style.scss';
 
 const Discover: React.FC = (): JSX.Element => {
 	const { data } = useSelector(selectContent);

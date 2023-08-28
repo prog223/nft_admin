@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import verifyToken from './middleware/jwt.js';
+import { Server } from 'socket.io';
 
 import adminRoute from './routes/admin.route.js';
 import nftRoute from './routes/nft.route.js';
@@ -12,7 +13,8 @@ import userRoute from './routes/user.route.js';
 import collectionRoute from './routes/collection.route.js';
 import dashboardRoute from './routes/dashboard.route.js';
 import requestRoute from './routes/request.route.js';
-import contentRoute from './routes/content.route.js'
+import contentRoute from './routes/content.route.js';
+import messageRoute from './routes/message.route.js';
 
 const app = express();
 dotenv.config();
@@ -28,7 +30,7 @@ try {
 
 app.use(
 	cors({
-		origin: 'http://localhost:3001',
+		origin: 'http://localhost:3000',
 		credentials: true,
 	})
 );
@@ -41,7 +43,8 @@ app.use('/api/user', verifyToken, userRoute);
 app.use('/api/collection', verifyToken, collectionRoute);
 app.use('/api/dashboard', verifyToken, dashboardRoute);
 app.use('/api/request', verifyToken, requestRoute);
-app.use('/api/content', verifyToken, contentRoute)
+app.use('/api/content', verifyToken, contentRoute);
+app.use('/api/message', verifyToken, messageRoute);
 
 app.use((err, req, res, next) => {
 	const errorStatus = err.status || 500;
@@ -49,6 +52,31 @@ app.use((err, req, res, next) => {
 	return res.status(errorStatus).send(errorMessage);
 });
 
-app.listen(8000, () => {
+const server = app.listen(8000, () => {
 	console.log('server is running on port 8000');
+});
+
+const io = new Server(server, {
+	cors: {
+		origin: 'http://localhost:3000',
+	},
+});
+
+global.onlineUsers = new Map();
+io.on('connection', (socket) => {
+	global.chatSocket = socket;
+	socket.on('add-user', (userId) => {
+		onlineUsers.set(userId, socket.id);
+	});
+
+	socket.on('send-msg', (data) => {
+		const sendUserSocket = onlineUsers.get(data.to);
+		if (sendUserSocket) {
+			socket.to(sendUserSocket).emit('msg-recieve', data);
+			socket.to(sendUserSocket).emit('notification', {
+				isRead: false,
+				sender: data.from,
+			});
+		}
+	});
 });

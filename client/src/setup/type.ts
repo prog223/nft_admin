@@ -7,7 +7,7 @@ export type changeT = {
 	current_password: string;
 	new_password: string;
 	confirm_password: string;
-}
+};
 
 export type AdminT = {
 	_id?: string;
@@ -26,7 +26,7 @@ export type UserT = {
 export type NftT = {
 	_id?: string;
 	name: string;
-	creator: {_id:string, username:string};
+	creator: { _id: string; username: string };
 	collectionId: string;
 	price: number;
 	bid: number;
@@ -34,10 +34,9 @@ export type NftT = {
 	category: string;
 	description: string;
 	tags: Array<string>;
-   expirationDate: string;
-	admin?: AdminT
+	expirationDate: string;
+	admin?: AdminT;
 };
-
 
 export type CollectionT = {
 	_id?: string;
@@ -50,5 +49,12 @@ export type CollectionT = {
 
 export type TabT = {
 	title: string;
-	id:number;
-}
+	id: number;
+};
+
+export type MessageT = {
+	from?: string;
+	to?: string;
+	message?: string;
+	page?: number
+};
