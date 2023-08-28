@@ -1,34 +1,22 @@
 @use '../../../assets/scss/' as *;
 
 .sidebar-cont {
-	width: 15vw;
+	width: 210px;
 	transition: all 0.5s;
 	height: 100%;
+	min-height: 100vh;
 
 	&__close {
-		width: 5vw;
-
-		@include tablet {
-			width: 10vw;
-		}
-
-		@include mobile {
-			width: 15vw;
-		}
+		width: 50px;
 	}
 }
 
 .content-cont {
-	width: 95vw;
+	width: calc(100vw - 210px);
+	transition: all 0.5s;
 
-	@include tablet {
-		width: 90vw;
-	}
-	@include mobile {
-		width: 85vw;
-	}
-
-	&__close {
-		width: 85vw;
+	&__active {
+		transition: all 0.5s;
+		width: calc(100vw - 50px);
 	}
 }

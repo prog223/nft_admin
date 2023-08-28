@@ -14,12 +14,18 @@ cloudinary.config({
 	api_secret: 'Vix0LMxynMqbVGXASBvqlm_b-lc',
 });
 
+const uploadOptions = {
+	upload_preset: 'rzar9eyn',
+};
+
 export const createNft = async (req, res, next) => {
 	try {
-		const result = await cloudinary.uploader.upload(req.body.image, {
-			folder: 'nft',
-		});
-
+		const result = await cloudinary.uploader.upload(
+			req.body.image,
+			{
+				folder: 'nft',
+			}
+		);
 		if (req.isSuper) {
 			const newNft = new Nft({
 				...req.body,

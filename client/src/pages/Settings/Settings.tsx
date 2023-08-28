@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import useGetAdmin from '../../setup/hooks/useGetAdmin';
 import CreateAdminForm from './CreateAdminForm';
 import ChangePasswordForm from './ChangePasswordForm';
-import './style.scss';
 import Tabs from '../../components/atoms/Tabs/Tabs';
+import './style.scss';
 
 const Settings: React.FC = (): JSX.Element => {
 	const admin = useGetAdmin();

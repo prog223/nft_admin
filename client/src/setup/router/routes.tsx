@@ -10,6 +10,7 @@ import CreateNft from "../../pages/CreateNft/CreateNft";
 import HomeSettings from "../../pages/HomeSettings/HomeSettings";
 import CreateCollection from "../../pages/CreateCollection/CreateCollection";
 import Error from "../../pages/Error/Error";
+import Chat from "../../pages/Chat/Chat";
 
 export function UseRoutes() {
    let element = useRoutes([
@@ -48,6 +49,10 @@ export function UseRoutes() {
             {
                path: 'home_settings',
                element: <HomeSettings/>
+            },
+            {
+               path: 'chat',
+               element: <Chat/>
             },
          ]
       },

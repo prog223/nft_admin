@@ -38,7 +38,7 @@ export const formatDate = (date: Date) => {
 	return `${month} ${day}, ${year}`;
 };
 
-export function sortByProperty(property: string, bool: boolean) {
+export function sortByProperty(property: any, bool: boolean) {
 	if (bool)
 		return function (a: any, b: any) {
 			if (a[property] > b[property]) {

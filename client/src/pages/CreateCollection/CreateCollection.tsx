@@ -8,10 +8,13 @@ import { selectUsers } from '../../redux/User/userSlice';
 import { getUsers } from '../../redux/User/userService';
 import { AppDispatch } from '../../redux/store';
 import { createCollection } from '../../redux/Collection/collectionService';
+import Loading from '../../components/atoms/Loading/Loading';
+import { selectCollections } from '../../redux/Collection/collectionSlice';
 
 const CreateCollection: React.FC = (): JSX.Element => {
 	const dispatch = useDispatch<AppDispatch>();
-	const { data, isLoading } = useSelector(selectUsers);
+	const { data } = useSelector(selectUsers);
+	const { isLoading } = useSelector(selectCollections);
 	const [file, setFile] = useState<string>('');
 	const fetchUsers = (search: string = '') => {
 		dispatch(getUsers({ search }));
@@ -51,62 +54,71 @@ const CreateCollection: React.FC = (): JSX.Element => {
 					image: file,
 				})
 			);
+
+			formElement.reset();
+			setFile('')
 		}
 	};
 	return (
-		<div>
-			<h1>Create Collection</h1>
-			<div className="create_nft__form">
-				<form
-					onSubmit={handleSubmit}
-					noValidate
-				>
-					<SearchInput
-						name="creator"
-						options={data?.users}
-						field="username"
-						fetch={fetchUsers}
-					/>
-					<div className="create_nft__form__section">
-						<div className="image_inp">
-							<span className="material-symbols-outlined">
-								upload_file
-							</span>
-							{file && (
-								<img
-									className="image_inp__image"
-									src={file}
-								/>
-							)}
-							<input
-								type="file"
-								onChange={(e) => onFileChange(e)}
+		<>
+			{isLoading ? (
+				<Loading />
+			) : (
+				<div>
+					<h1>Create Collection</h1>
+					<div className="create_nft__form">
+						<form
+							onSubmit={handleSubmit}
+							noValidate
+						>
+							<SearchInput
+								name="creator"
+								options={data?.users}
+								field="username"
+								fetch={fetchUsers}
 							/>
-						</div>
-						<div className="create_nft__form__section_group">
-							<Input
-								name="nft"
-								placeholder="Name"
-								size="small"
-								required
-							/>
-							<div className="textarea-wrapper">
-								<Textarea
-									name="description"
-									placeholder="Description"
-									size="small"
-									required
-								/>
+							<div className="create_nft__form__section">
+								<div className="image_inp">
+									<span className="material-symbols-outlined">
+										upload_file
+									</span>
+									{file && (
+										<img
+											className="image_inp__image"
+											src={file}
+										/>
+									)}
+									<input
+										type="file"
+										onChange={(e) => onFileChange(e)}
+									/>
+								</div>
+								<div className="create_nft__form__section_group">
+									<Input
+										name="nft"
+										placeholder="Name"
+										size="small"
+										required
+									/>
+									<div className="textarea-wrapper">
+										<Textarea
+											name="description"
+											placeholder="Description"
+											size="small"
+											required
+										/>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
 
-					<div className="create_nft__form__section">
-						<Button size="small">Save</Button>
+							<div className="create_nft__form__section">
+								<Button size="small">Save</Button>
+							</div>
+						</form>
 					</div>
-				</form>
-			</div>
-		</div>
+				</div>
+			)}
+		</>
 	);
 };
 

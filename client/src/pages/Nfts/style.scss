@@ -29,12 +29,13 @@
 			@include flex(center, flex-end, row, 10px);
 			margin-top: 20px;
 			width: 100%;
+
 			button {
 				max-width: 100px;
 			}
 
 			@include tablet{
-				flex-direction: column;
+				margin-top: 10px;
 			}
 		}
 

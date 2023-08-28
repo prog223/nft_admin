@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import User from '../../atoms/User/User';
 import SearchInput from '../../atoms/SearchInput/SearchInput';
 import axios from '../../../api/axios';
-import './style.scss';
-import { selectCollections } from '../../../redux/Collection/collectionSlice';
 import { CollectionT } from '../../../setup/type';
 import CollectionSkeleton from '../../atoms/CollectionSkeleton/CollectionSkeleton';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { selectContent } from '../../../redux/Content/contentSlice';
+import './style.scss';
 
 interface Props {
 	content?: any;

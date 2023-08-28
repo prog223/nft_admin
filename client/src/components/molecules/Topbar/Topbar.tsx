@@ -1,11 +1,11 @@
 import React from 'react';
-import './style.scss';
 import useGetAdmin from '../../../setup/hooks/useGetAdmin';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../atoms/Button/Button';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../redux/store';
 import { logout } from '../../../redux/Auth/authService';
+import './style.scss';
 
 const Topbar: React.FC = (): JSX.Element => {
 	const admin = useGetAdmin();

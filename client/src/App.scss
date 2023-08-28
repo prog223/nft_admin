@@ -41,3 +41,14 @@ body {
 .red{
 	color: #767677b6;
 }
+
+.container-default{
+	padding: 30px 30px 0 30px;
+	width: 100%;
+	height: calc( 100vh - $header-height);
+	overflow-y: scroll;
+
+	@include mobile{
+		padding: 20px 10px 0;
+	}
+}

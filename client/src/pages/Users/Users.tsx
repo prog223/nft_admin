@@ -21,16 +21,12 @@ import './style.scss';
 const Users: React.FC = (): JSX.Element => {
 	const dispatch = useDispatch<AppDispatch>();
 	const { data, isLoading } = useSelector(selectUsers);
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const [arr, setData] = useState<Array<NftT>>(data?.users);
 	const { currentPage, itemsPerPage } = usePagination();
-
 	const [columns, setColumns] = useState<Array<any>>([]);
 	const [columnsClone, setColumnsClone] = useState<Array<any>>([]);
-
 	const [hideArr, setHideArr] = useState<Array<string | number>>([]);
-	// const [reset, setReset] = useState(true);
-
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	const fetchData = (search: string = '') => {
@@ -111,53 +107,65 @@ const Users: React.FC = (): JSX.Element => {
 				<div>
 					<h1>Users</h1>
 				</div>
-				<div className="nfts__chekbox checkbox">
-					<input
-						type="text"
-						placeholder="name"
-						onChange={(e) => optimizedFn(e.target.value)}
-						className="nfts__chekbox__search"
-					/>
-				</div>
-				<div className="nfts__table__wrap">
-					{isLoading ? (
-						<TableSkeleton count={9} />
-					) : (
-						<>
-							<Table>
-								<TableHeader
-									columns={columnsClone}
-									filter={filter}
-									reset={() => setData(data?.users)}
-								/>
-								<TableBody
-									data={arr}
-									columns={columnsClone}
-									handleFilterChange={handleFilterChange}
-									isLoading={true}
-								/>
-							</Table>
-						</>
-					)}
-				</div>
-				<div className="nfts__table__btns">
-					<div>
-						<Pagination total={data?.pagination?.total} />
+				{!!arr?.length || isLoading ? (
+					<>
+						<div className="nfts__chekbox checkbox">
+							<input
+								type="text"
+								placeholder="name"
+								onChange={(e) => optimizedFn(e.target.value)}
+								className="nfts__chekbox__search"
+							/>
+						</div>
+						<div className="nfts__table__wrap">
+							{isLoading ? (
+								<TableSkeleton count={6} />
+							) : arr?.length ? (
+								<>
+									<Table>
+										<TableHeader
+											columns={columnsClone}
+											filter={filter}
+											reset={() => setData(data?.users)}
+										/>
+										<TableBody
+											data={arr}
+											columns={columnsClone}
+											handleFilterChange={handleFilterChange}
+											isLoading={true}
+										/>
+									</Table>
+								</>
+							) : (
+								<div className="nfts__table__wrap_message">
+									Not found
+								</div>
+							)}
+						</div>
+						<div className="nfts__table__btns">
+							<div>
+								<Pagination total={data?.pagination?.total} />
+							</div>
+							<Button
+								onClick={hide}
+								size="small"
+							>
+								Hide
+							</Button>
+							<Button
+								onClick={() => setIsOpen(true)}
+								size="small"
+								variant="second"
+							>
+								Delete
+							</Button>
+						</div>
+					</>
+				) : (
+					<div style={{ padding: '40px', textAlign: 'center' }}>
+						No users yet
 					</div>
-					<Button
-						onClick={hide}
-						size="small"
-					>
-						Hide
-					</Button>
-					<Button
-						onClick={() => setIsOpen(true)}
-						size="small"
-						variant="second"
-					>
-						Delete
-					</Button>
-				</div>
+				)}
 			</div>
 		</>
 	);

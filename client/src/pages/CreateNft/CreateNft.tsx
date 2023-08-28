@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from '../../components/atoms/Input/Input';
 import Textarea from '../../components/atoms/Textarea/Textarea';
 import Button from '../../components/atoms/Button/Button';
@@ -8,10 +8,12 @@ import { getUsers } from '../../redux/User/userService';
 import { selectUsers } from '../../redux/User/userSlice';
 import { getCollections } from '../../redux/Collection/collectionService';
 import { selectCollections } from '../../redux/Collection/collectionSlice';
-import './style.scss';
 import SearchInput from '../../components/atoms/SearchInput/SearchInput';
 import useTomorrowDate from '../../setup/hooks/useTomorrowDate';
 import { createNft } from '../../redux/Nft/nftService';
+import { selectNfts } from '../../redux/Nft/nftSlice';
+import Loading from '../../components/atoms/Loading/Loading';
+import './style.scss';
 
 const CreateNft: React.FC = (): JSX.Element => {
 	const [tags, setTags] = useState<Array<string>>([]);
@@ -21,7 +23,8 @@ const CreateNft: React.FC = (): JSX.Element => {
 
 	const dispatch = useDispatch<AppDispatch>();
 
-	const { data, isLoading } = useSelector(selectUsers);
+	const { data } = useSelector(selectUsers);
+	const { isLoading } = useSelector(selectNfts);
 	const collections = useSelector(selectCollections);
 
 	const fetchUsers = (search: string = '') => {
@@ -83,7 +86,7 @@ const CreateNft: React.FC = (): JSX.Element => {
 
 		if (!tags.length) formElement.tags.focus();
 		firstInvalidField?.focus();
-		
+
 		if (isValid && tags.length) {
 			dispatch(
 				createNft({
@@ -96,163 +99,172 @@ const CreateNft: React.FC = (): JSX.Element => {
 					category: formElement.category.value,
 					expirationDate: formElement.expirationDate.value,
 					collectionId: formElement.collection.value,
-					tags
+					tags,
 				})
 			);
+
+			formElement.reset();
+			setTags([]);
+			setFile('');
 		}
 	};
 
 	return (
-		<div className="create_nft">
-			<div>
-				<h1>Create NFT</h1>
-			</div>
-			<div className="create_nft__form">
-				<form
-					onSubmit={handleSubmit}
-					noValidate
-				>
-					<SearchInput
-						name="creator"
-						options={data?.users}
-						field="username"
-						fetch={fetchUsers}
-					/>
-					<SearchInput
-						name="collection"
-						options={collections?.data?.collections}
-						field="name"
-						fetch={fetchCollections}
-					/>
-					<div className="create_nft__form__section">
-						<div className="image_inp">
-							<span className="material-symbols-outlined">
-								upload_file
-							</span>
-							{file && (
-								<img
-									className="image_inp__image"
-									src={file}
-								/>
-							)}
-							<input
-								type="file"
-								onChange={(e) => onFileChange(e)}
+		<>
+			{isLoading ? (
+				<Loading />
+			) : (
+				<div className="create_nft">
+					<div>
+						<h1>Create NFT</h1>
+					</div>
+					<div className="create_nft__form">
+						<form
+							onSubmit={handleSubmit}
+							noValidate
+						>
+							<SearchInput
+								name="creator"
+								options={data?.users}
+								field="username"
+								fetch={fetchUsers}
 							/>
-						</div>
-						<div className="create_nft__form__section_group">
-							<Input
-								name="nft"
-								placeholder="Name"
-								size="small"
-								required
+							<SearchInput
+								name="collection"
+								options={collections?.data?.collections}
+								field="name"
+								fetch={fetchCollections}
 							/>
-							<div className="textarea-wrapper">
-								<Textarea
-									name="description"
-									placeholder="Description"
+							<div className="create_nft__form__section">
+								<div className="image_inp">
+									<span className="material-symbols-outlined">
+										upload_file
+									</span>
+									{file && (
+										<img
+											className="image_inp__image"
+											src={file}
+										/>
+									)}
+									<input
+										type="file"
+										onChange={(e) => onFileChange(e)}
+									/>
+								</div>
+								<div className="create_nft__form__section_group">
+									<Input
+										name="nft"
+										placeholder="Name"
+										size="small"
+										required
+									/>
+									<div className="textarea-wrapper">
+										<Textarea
+											name="description"
+											placeholder="Description"
+											size="small"
+											required
+										/>
+									</div>
+								</div>
+							</div>
+
+							<div className="create_nft__form__section_group">
+								<Input
+									label="Expiration Date"
+									type="date"
+									name="expirationDate"
 									size="small"
+									defaultValue={tomorrow}
+									min={tomorrow}
 									required
 								/>
-							</div>
-						</div>
-					</div>
-
-					<div className="create_nft__form__section_group">
-						<Input
-							label="Expiration Date"
-							type="date"
-							name="expirationDate"
-							size="small"
-							defaultValue={tomorrow}
-							min={tomorrow}
-							required
-						/>
-						<select
-							name="category"
-							id=""
-							className="create_nft__form__select"
-						>
-							<option
-								value=""
-								disabled
-								// selected
-								defaultChecked
-							>
-								Category
-							</option>
-							{categories.map((e, i) => {
-								return (
+								<select
+									name="category"
+									id=""
+									className="create_nft__form__select"
+								>
 									<option
-										value="e"
-										key={i}
+										value=""
+										disabled
+										defaultChecked
 									>
-										{e}
+										Category
 									</option>
-								);
-							})}
-						</select>
-					</div>
-					<div className="create_nft__form__section">
-						<Input
-							type="number"
-							name="price"
-							placeholder="Price"
-							size="small"
-							required
-							min="0"
-						/>
-						<Input
-							type="number"
-							name="bid"
-							placeholder="Bid"
-							size="small"
-							required
-							min="0"
-						/>
-					</div>
-					<div className="tag_input">
-						<div className="tag_input__inp">
-							<input
-								name="tags"
-								value={tag}
-								type="text"
-								onChange={(e: any) => setTag(e.target.value)}
-								placeholder="Tag"
-							/>
-							<button
-								type="button"
-								onClick={addTag}
-							>
-								Add
-							</button>
-						</div>
-						<div className="tag_input__tags">
-							{tags.map((e: string, i: number) => {
-								return (
-									<div
-										key={i}
-										className="tag_input__tags__tag"
+									{categories.map((e, i) => {
+										return (
+											<option
+												value="e"
+												key={i}
+											>
+												{e}
+											</option>
+										);
+									})}
+								</select>
+							</div>
+							<div className="create_nft__form__section">
+								<Input
+									type="number"
+									name="price"
+									placeholder="Price"
+									size="small"
+									required
+									min="0"
+								/>
+								<Input
+									type="number"
+									name="bid"
+									placeholder="Bid"
+									size="small"
+									required
+									min="0"
+								/>
+							</div>
+							<div className="tag_input">
+								<div className="tag_input__inp">
+									<input
+										name="tags"
+										value={tag}
+										type="text"
+										onChange={(e: any) => setTag(e.target.value)}
+										placeholder="Tag"
+									/>
+									<button
+										type="button"
+										onClick={addTag}
 									>
-										{e}{' '}
-										<span
-											onClick={() => deleteTag(i)}
-											className="tag_input__tags__tag__close"
-										>
-											x
-										</span>
-									</div>
-								);
-							})}
-						</div>
-					</div>
+										Add
+									</button>
+								</div>
+								<div className="tag_input__tags">
+									{tags.map((e: string, i: number) => {
+										return (
+											<div
+												key={i}
+												className="tag_input__tags__tag"
+											>
+												{e}{' '}
+												<span
+													onClick={() => deleteTag(i)}
+													className="tag_input__tags__tag__close"
+												>
+													x
+												</span>
+											</div>
+										);
+									})}
+								</div>
+							</div>
 
-					<div className="create_nft__form__section">
-						<Button size="small">Save</Button>
+							<div className="create_nft__form__section">
+								<Button size="small">Save</Button>
+							</div>
+						</form>
 					</div>
-				</form>
-			</div>
-		</div>
+				</div>
+			)}
+		</>
 	);
 };
 

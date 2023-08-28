@@ -1,16 +1,13 @@
 @use '../../../assets/scss/' as *;
 
 .sidebar {
-	height: 100vh;
+	min-height: 100vh;
+	height: 100%;
 	width: 100%;
 	transition: all 0.5s;
 	background-color: $second-color;
-	padding: 20px 10px 10px 20px;
+	padding: 20px 10px;
 	position: relative;
-
-	@include tablet {
-		padding: 20px 10px;
-	}
 
 	&_wrapper{
 		overflow: hidden

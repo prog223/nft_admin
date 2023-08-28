@@ -1,0 +1,22 @@
+@use '../../assets/scss/' as *;
+
+.error-page{
+   @include flex(center, center, column, 40px);
+   height: 100vh;
+   width: 100%;
+   font-size: 28px;
+
+   &_img{
+      img{
+         object-fit: cover;
+      }
+   }
+
+   &_four{
+      font-size: 50px;
+      font-weight: 700;
+   }
+   &_btn{
+      width: 100px;
+  }
+}

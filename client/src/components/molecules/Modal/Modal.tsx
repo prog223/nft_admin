@@ -1,6 +1,6 @@
 import React from 'react';
-import './style.scss';
 import Button from '../../atoms/Button/Button';
+import './style.scss';
 
 interface Props {
 	isOpen: boolean;

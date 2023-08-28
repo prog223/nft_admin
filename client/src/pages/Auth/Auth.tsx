@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Input from '../../components/atoms/Input/Input';
-import './style.scss';
 import Button from '../../components/atoms/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
@@ -9,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { selectAuth } from '../../redux/Auth/authSlice';
 import Loading from '../../components/atoms/Loading/Loading';
 import { useToast } from '../../setup/hooks/useToast';
+import './style.scss';
 
 const Auth: React.FC = (): JSX.Element => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -58,7 +58,6 @@ const Auth: React.FC = (): JSX.Element => {
 								name="email"
 								placeholder="Email"
 								size="small"
-								// icon={<User />}
 								required
 							/>
 							<Input
@@ -66,7 +65,6 @@ const Auth: React.FC = (): JSX.Element => {
 								name="password"
 								placeholder="Password"
 								size="small"
-								// icon={<Lock />}
 								required
 							/>
 

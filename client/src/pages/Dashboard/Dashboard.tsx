@@ -18,6 +18,7 @@ import Modal from '../../components/molecules/Modal/Modal';
 import DashboardModal from './DashboardModal';
 import useGetAdmin from '../../setup/hooks/useGetAdmin';
 import './style.scss';
+import Loading from '../../components/atoms/Loading/Loading';
 
 const Dashboard: React.FC = (): JSX.Element => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -31,7 +32,7 @@ const Dashboard: React.FC = (): JSX.Element => {
 	const [show, setShow] = useState<boolean>(false);
 	const [mail, setMail] = useState<string>('');
 
-	const [columns, setColumns] = useState<Array<any>>([
+	const [columns] = useState<Array<any>>([
 		{ key: 'admin', title: 'Admin' },
 		{ key: 'name', title: 'Name' },
 		{ key: 'description', title: 'Description' },
@@ -131,76 +132,80 @@ const Dashboard: React.FC = (): JSX.Element => {
 					)}
 				</div>
 			</Modal>
-			<div className="dashboard">
-				<div>
-					<h1>Dashboard</h1>
-				</div>
-				<div className="dashboard__container">
-					<div className="dashboard__container__info">
-						<div className="dashboard__container__info__item">
-							<span className="material-symbols-outlined">group</span>
-							<div>
-								<h3>Users</h3>
-								<p>{data?.info?.usersCount}</p>
-							</div>
-						</div>
-						<div className="dashboard__container__info__item">
-							<span className="material-symbols-outlined">
-								rocket_launch
-							</span>
-							<div>
-								<h3>Nfts</h3>
-								<p>{data?.info?.nftsCount}</p>
-							</div>
-						</div>
-						<div className="dashboard__container__info__item">
-							<span className="material-symbols-outlined">
-								library_books
-							</span>
-							<div>
-								<h3>Collections</h3>
-								<p>{data?.info?.collectionsCount}</p>
-							</div>
-						</div>
+			{isLoading ? (
+				<Loading />
+			) : (
+				<div className="dashboard">
+					<div>
+						<h1>Dashboard</h1>
 					</div>
-					<div className="dashboard__container__requests">
-						<div className="nfts__chekbox checkbox">
-							<input
-								type="text"
-								placeholder="name"
-								onChange={(e) => optimizedFn(e.target.value)}
-								className="nfts__chekbox__search"
-							/>
+					<div className="dashboard__container">
+						<div className="dashboard__container__info">
+							<div className="dashboard__container__info__item">
+								<span className="material-symbols-outlined">group</span>
+								<div>
+									<h3>Users</h3>
+									<p>{data?.info?.usersCount}</p>
+								</div>
+							</div>
+							<div className="dashboard__container__info__item">
+								<span className="material-symbols-outlined">
+									rocket_launch
+								</span>
+								<div>
+									<h3>Nfts</h3>
+									<p>{data?.info?.nftsCount}</p>
+								</div>
+							</div>
+							<div className="dashboard__container__info__item">
+								<span className="material-symbols-outlined">
+									library_books
+								</span>
+								<div>
+									<h3>Collections</h3>
+									<p>{data?.info?.collectionsCount}</p>
+								</div>
+							</div>
 						</div>
-						{data?.requests?.requests.length ? (
-							<>
-								<Table>
-									<TableHeader
-										columns={columns}
-										filter={filter}
-										reset={() => setData(data?.requests?.requests)}
-									/>
-									<TableBody
-										data={arr}
-										columns={columns}
-										handleFilterChange={handleFilterChange}
-										isLoading={true}
-										hide={false}
-										actionButton={
-											admin.isSuper && {
-												text: 'See',
-												action: showModal,
+						<div className="dashboard__container__requests">
+							<div className="nfts__chekbox checkbox">
+								<input
+									type="text"
+									placeholder="name"
+									onChange={(e) => optimizedFn(e.target.value)}
+									className="nfts__chekbox__search"
+								/>
+							</div>
+							{data?.requests?.requests.length ? (
+								<>
+									<Table>
+										<TableHeader
+											columns={columns}
+											filter={filter}
+											reset={() => setData(data?.requests?.requests)}
+										/>
+										<TableBody
+											data={arr}
+											columns={columns}
+											handleFilterChange={handleFilterChange}
+											isLoading={true}
+											hide={false}
+											actionButton={
+												admin.isSuper && {
+													text: 'See',
+													action: showModal,
+												}
 											}
-										}
-									/>
-								</Table>
-							</>
-						) : (
-							<h2>No requests</h2>
-						)}
+										/>
+									</Table>
+								</>
+							) : (
+								<h2>No requests</h2>
+							)}
+						</div>
 					</div>
 				</div>
-			</div>
+			)}
 		</>
 	);
 };

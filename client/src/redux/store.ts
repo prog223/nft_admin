@@ -5,6 +5,7 @@ import collectionReducer from './Collection/collectionSlice';
 import nftReducer from './Nft/nftSlice';
 import infoReducer from './Info/infoSlice';
 import contentReducer from './Content/contentSlice';
+import messageReducer from './Message/messageSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
 		collection: collectionReducer,
 		nft: nftReducer,
 		info: infoReducer,
-		content: contentReducer
+		content: contentReducer,
+		message: messageReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

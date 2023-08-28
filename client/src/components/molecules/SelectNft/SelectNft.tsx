@@ -5,12 +5,12 @@ import { AppDispatch } from '../../../redux/store';
 import { getNft, getNfts } from '../../../redux/Nft/nftService';
 import { selectNfts } from '../../../redux/Nft/nftSlice';
 import Box from '../../atoms/Box/Box';
-import './style.scss';
 import { NftT } from '../../../setup/type';
 import axios from '../../../api/axios';
 import BoxSkeleton from '../../atoms/BoxSkeleton/BoxSkeleton';
 import { selectContent } from '../../../redux/Content/contentSlice';
 import classNames from 'classnames';
+import './style.scss';
 
 interface Props {
 	size?: 'sm' | 'bg';
@@ -20,7 +20,7 @@ interface Props {
 
 const SelectNft: React.FC<Props> = ({ size, content, handleClick }) => {
 	const dispatch = useDispatch<AppDispatch>();
-	const { data, nft } = useSelector(selectNfts);
+	const { data } = useSelector(selectNfts);
 	const [nftData, setNftData] = useState<NftT | null>(null);
 	const [selected, setSelected] = useState<any>('');
 	const [isLoading, setIsLoading] = useState<boolean>(false);

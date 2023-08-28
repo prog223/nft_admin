@@ -26,6 +26,7 @@ const nftSlice = createSlice({
 		builder
 			.addCase(createNft.pending, (state) => {
 				state.isLoading = true;
+
 			})
 			.addCase(createNft.fulfilled, (state, action: PayloadAction<any>) => {
 				state.data = action.payload.data;

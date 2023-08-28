@@ -17,7 +17,6 @@ export const createContent = async (req, res, next) => {
 export const updateContent = async (req, res, next) => {
 	try {
 		const content = await Content.findOne();
-		console.log(req.body);
 		if (req.body.greetings) {
 			content.greetings = req.body.greetings;
 			await content.save();
@@ -59,7 +58,14 @@ export const updateContent = async (req, res, next) => {
 export const getContent = async (req, res, next) => {
 	try {
 		const content = await Content.findOne()
-			.populate('greetings')
+			.populate({
+				path: 'greetings',
+				populate: {
+					path: 'creator',
+					model: 'User',
+					select: ['username', 'avatar'],
+				},
+			})
 			.populate({
 				path: 'trending.collection',
 				populate: {
