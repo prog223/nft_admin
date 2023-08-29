@@ -10,7 +10,7 @@ import Loading from '../../components/atoms/Loading/Loading';
 
 const ChangePasswordForm: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
-	const { isLoading, error } = useSelector(selectAuth);
+	const { isLoading } = useSelector(selectAuth);
 	const navigate = useNavigate();
 	const handleSubmit = (e: any) => {
 		e.preventDefault();

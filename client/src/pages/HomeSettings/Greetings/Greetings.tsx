@@ -8,7 +8,7 @@ import { AppDispatch } from '../../../redux/store';
 import './style.scss';
 
 const Greetings: React.FC = (): JSX.Element => {
-	const { data, isLoading, error } = useSelector(selectContent);
+	const { data } = useSelector(selectContent);
 	const dispatch = useDispatch<AppDispatch>();
 	const handleClick = (content: any) => {
 		if (content.selected && data?.greetings?._id !== content.selected) {

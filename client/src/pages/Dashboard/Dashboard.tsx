@@ -11,7 +11,7 @@ import { selectInfo } from '../../redux/Info/infoSlice';
 import Table from '../../components/atoms/Table/Table';
 import TableBody from '../../components/atoms/Table/TableBody';
 import { NftT } from '../../setup/type';
-import { debounce, sortByProperty, upperCase } from '../../setup/utils';
+import { debounce, sortByProperty } from '../../setup/utils';
 import TableHeader from '../../components/atoms/Table/TableHeader';
 import usePagination from '../../setup/hooks/usePagination';
 import Modal from '../../components/molecules/Modal/Modal';

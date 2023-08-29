@@ -48,7 +48,11 @@ export const login = async (req, res, next) => {
 		);
 
 		const { password, ...info } = admin._doc;
-		res.cookie('accessToken', token, { httpOnly: true })
+		res.cookie('accessToken', token, {
+			httpOnly: true,
+			secure: true,
+			sameSite: 'none',
+		})
 			.status(200)
 			.send(info);
 	} catch (e) {
@@ -93,9 +97,12 @@ export const changePassword = async (req, res, next) => {
 
 export const getContacts = async (req, res, next) => {
 	try {
-		const contacts = await Admin.find({ _id: { $ne: req.userId } }).select(['name', 'surname'])
-		if(!contacts.length) return next(createError(404, 'Contacts not found'))
-		res.status(200).send(contacts)
+		const contacts = await Admin.find({ _id: { $ne: req.userId } }).select([
+			'name',
+			'surname',
+		]);
+		if (!contacts.length) return next(createError(404, 'Contacts not found'));
+		res.status(200).send(contacts);
 	} catch (err) {
 		next(err);
 	}

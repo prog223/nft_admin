@@ -56,7 +56,7 @@ const Nfts: React.FC = (): JSX.Element => {
 		}
 
 		setData(
-			data?.nfts.map((e: any) => ({
+			data?.nfts?.map((e: any) => ({
 				...e,
 				collectionId: e.collectionId.name,
 			}))

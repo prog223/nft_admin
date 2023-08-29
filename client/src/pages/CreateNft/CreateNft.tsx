@@ -211,6 +211,7 @@ const CreateNft: React.FC = (): JSX.Element => {
 									size="small"
 									required
 									min="0"
+									step="0.01"
 								/>
 								<Input
 									type="number"
@@ -219,6 +220,7 @@ const CreateNft: React.FC = (): JSX.Element => {
 									size="small"
 									required
 									min="0"
+									step="0.01"
 								/>
 							</div>
 							<div className="tag_input">

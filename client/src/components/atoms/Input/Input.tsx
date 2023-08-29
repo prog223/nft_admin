@@ -20,6 +20,7 @@ interface Props {
 	label?: string;
 	ref?: any;
 	defaultValue?: string;
+	step?:string;
 }
 
 const Input: React.FC<Props> = ({

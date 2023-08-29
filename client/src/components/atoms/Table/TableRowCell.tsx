@@ -20,7 +20,7 @@ const TableRowCell: React.FC<Props> = ({
 				)}
 
 				{column.key === 'image' && item.image && (
-					<div>
+					<div className='table-image'>
 						<img src={item.image}></img>
 					</div>
 				)}
