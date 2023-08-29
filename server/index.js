@@ -30,7 +30,7 @@ try {
 
 app.use(
 	cors({
-		origin: 'http://localhost:3000',
+		origin: process.env.CLIENT_URL,
 		credentials: true,
 	})
 );
@@ -58,7 +58,7 @@ const server = app.listen(8000, () => {
 
 const io = new Server(server, {
 	cors: {
-		origin: 'http://localhost:3000',
+		origin: process.env.CLIENT_URL,
 	},
 });
 
