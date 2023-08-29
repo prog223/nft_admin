@@ -13,7 +13,7 @@ import './style.scss';
 
 const Nft: React.FC = (): JSX.Element => {
 	const dispatch = useDispatch<AppDispatch>();
-	const { data, isLoading: nftIsLoading } = useSelector(selectNfts);
+	const { data } = useSelector(selectNfts);
 	const { data: nft, isLoading: contentIsLoading } = useSelector(selectContent);
 	const fetchData = (search: string = '') => {
 		dispatch(getNfts({ search }));

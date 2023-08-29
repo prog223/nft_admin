@@ -1,8 +1,8 @@
 import React from 'react';
-import './style.scss';
 import Button from '../../components/atoms/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import Img from '../../assets/images/errorPage.png';
+import './style.scss';
 
 const Error: React.FC = (): JSX.Element => {
 	const navigate = useNavigate();

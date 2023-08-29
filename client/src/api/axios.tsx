@@ -7,12 +7,15 @@ interface Props {
 	children: any;
 }
 
+const baseUrl = process.env.REACT_APP_BASE_URL
+const clientUrl = process.env.REACT_APP_CLIENT_URL
+
 const instance = axios.create({
-	baseURL: 'http://localhost:8000/api/',
+	baseURL: `${baseUrl}/api/`,
 	withCredentials: true,
 	headers: {
 		'Content-Type': 'application/json',
-		'Access-Control-Allow-Origin': 'http://localhost:3000',
+		'Access-Control-Allow-Origin': clientUrl,
 	},
 });
 

@@ -67,7 +67,7 @@ const Collections: React.FC = (): JSX.Element => {
 		}
 	};
 
-	const [columns, setColumns] = useState<Array<any>>([
+	const [columns] = useState<Array<any>>([
 		{ key: 'creator', title: 'Creator' },
 		{ key: 'name', title: 'Name' },
 		{ key: 'description', title: 'Description' },

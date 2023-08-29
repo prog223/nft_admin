@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectNfts } from '../../redux/Nft/nftSlice';
 import { useSearchParams } from 'react-router-dom';
 import { NftT } from '../../setup/type';
 import { debounce, sortByProperty, upperCase } from '../../setup/utils';
-import { deleteNfts, getNfts } from '../../redux/Nft/nftService';
 import { AppDispatch } from '../../redux/store';
 import Table from '../../components/atoms/Table/Table';
 import TableHeader from '../../components/atoms/Table/TableHeader';
