@@ -51,7 +51,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
 			{showEmojiPicker && (
 				<div className="emoji_cont">
 					<Picker
-						height={250}
+						height={260}
 						width="100%"
 						lazyLoadEmojis={true}
 						searchDisabled={true}

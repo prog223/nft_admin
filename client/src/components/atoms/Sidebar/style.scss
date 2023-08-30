@@ -96,6 +96,20 @@
 			}
 		}
 	}
+
+	&_icon{
+		position: relative;
+
+		&__notification{
+			position: absolute;
+			background-color: red;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			top: -2px;
+			right: -2px;
+		}
+	}
 }
 
 .opacity {

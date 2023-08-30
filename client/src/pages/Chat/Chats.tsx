@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../api/axios';
 import classNames from 'classnames';
-import { Socket } from 'socket.io-client';
-
+import { useChat } from '../../setup/contexts/socketContext';
 interface Props {
 	onSelect: (_id: string) => void;
 	current: { _id: string } | null;
-	socket: React.MutableRefObject<Socket | null>;
 }
 
-const Chats: React.FC<Props> = ({ onSelect, current, socket }) => {
+const Chats: React.FC<Props> = ({ onSelect, current }) => {
 	const [contacts, setContacts] = useState<any[]>([]);
-	const [notifications, setNotifications] = useState<any[]>([]);
-
+	const { notifications, setNotifications } = useChat();
 	const fetchContacts = async () => {
 		try {
 			const response = await axios.get(`admin/contacts`);
@@ -26,17 +23,10 @@ const Chats: React.FC<Props> = ({ onSelect, current, socket }) => {
 		fetchContacts();
 	}, []);
 
-	useEffect(() => {
-		if (socket.current) {
-			socket.current.on('notification', (ntf: any) => {
-				const isChatOpen = current?._id === ntf.sender;
-				if (!isChatOpen) setNotifications((prev: any) => [ntf, ...prev]);
-			});
-		}
-	}, [socket.current]);
-
 	const notificationCount = (id: string) => {
-		const array = notifications.filter((ntf) => ntf.sender === id && id !== current?._id);
+		const array = notifications.filter(
+			(ntf: any) => ntf.sender === id && id !== current?._id
+		);
 		if (array) return array.length;
 	};
 
@@ -54,7 +44,7 @@ const Chats: React.FC<Props> = ({ onSelect, current, socket }) => {
 									onSelect(e._id);
 									setNotifications([
 										...notifications.filter(
-											(e) => e.sender === e._id
+											(e: any) => e.sender === e._id
 										),
 									]);
 								}}

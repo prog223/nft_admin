@@ -141,22 +141,24 @@ const Users: React.FC = (): JSX.Element => {
 							)}
 						</div>
 						<div className="nfts__table__btns">
-							<div>
+							<div className='nfts__table__btns_pagination'>
 								<Pagination total={data?.pagination?.total} />
 							</div>
-							<Button
-								onClick={hide}
-								size="small"
-							>
-								Hide
-							</Button>
-							<Button
-								onClick={() => setIsOpen(true)}
-								size="small"
-								variant="second"
-							>
-								Delete
-							</Button>
+							<div className="nfts__table__btns_cont">
+								<Button
+									onClick={hide}
+									size="small"
+								>
+									Hide
+								</Button>
+								<Button
+									onClick={() => setIsOpen(true)}
+									size="small"
+									variant="second"
+								>
+									Delete
+								</Button>
+							</div>
 						</div>
 					</>
 				) : (

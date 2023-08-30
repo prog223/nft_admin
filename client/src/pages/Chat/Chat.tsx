@@ -1,20 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Chats from './Chats';
 import useGetAdmin from '../../setup/hooks/useGetAdmin';
-import { io, Socket } from 'socket.io-client';
 import ChatContainer from './ChatContainer';
 import './style.scss';
+import { useChat } from '../../setup/contexts/socketContext';
 
-const host: any = process.env.REACT_APP_BASE_URL;
 const Chat: React.FC = () => {
 	const admin = useGetAdmin();
-	const socket = useRef<Socket | null>(null);
+	const {socket} = useChat()	
 	const [currentChat, setCurrentChat] = useState<{ _id: string } | null>(null);
 
 	useEffect(() => {
 		if (admin) {
-			socket.current = io(host);
-			socket.current.emit('add-user', admin._id);
+			socket.emit('add-user', admin._id);
 		}
 	}, [admin]);
 
@@ -23,12 +21,10 @@ const Chat: React.FC = () => {
 			<Chats
 				onSelect={(_id: string) => setCurrentChat({ _id })}
 				current={currentChat}
-				socket={socket}
 			/>
 			{currentChat ? (
 				<>
 					<ChatContainer
-						socket={socket}
 						currentChat={currentChat}
 					/>
 				</>

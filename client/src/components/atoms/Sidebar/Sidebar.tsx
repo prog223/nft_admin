@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import useMediaQuery from '../../../setup/hooks/useMeduaQuery';
 import useGetAdmin from '../../../setup/hooks/useGetAdmin';
 import './style.scss';
+import { useChat } from '../../../setup/contexts/socketContext';
 
 interface Props {
 	toggle: boolean;
@@ -18,7 +19,8 @@ const Sidebar: React.FC<Props> = ({
 	const [dropDownCollection, setDropDownCollection] = useState<boolean>(false);
 	const mobile = useMediaQuery('(max-width: 576px)');
 	const user = useGetAdmin();
-
+	const { notifications } = useChat();
+	const location = useLocation();
 	useEffect(() => {
 		if (mobile) {
 			setToggle(false);
@@ -27,10 +29,12 @@ const Sidebar: React.FC<Props> = ({
 
 	return (
 		<div className={classNames('sidebar', { active: toggle })}>
-			<div className='sidebar_wrapper'>
+			<div className="sidebar_wrapper">
 				{!mobile && (
 					<button
-						className={classNames("sidebar__toggle-btn", {'sidebar__toggle-btn_open': toggle})}
+						className={classNames('sidebar__toggle-btn', {
+							'sidebar__toggle-btn_open': toggle,
+						})}
 						onClick={() => {
 							setToggle(!toggle);
 						}}
@@ -198,9 +202,17 @@ const Sidebar: React.FC<Props> = ({
 							</li>
 							<li>
 								<Link to={'/admin/chat'}>
-									<span className="material-symbols-outlined">
-										forum
-									</span>
+									<div className="sidebar_icon">
+										<span className="material-symbols-outlined">
+											forum
+										</span>
+										{notifications.length &&
+										location.pathname !== '/admin/chat' ? (
+											<span className="sidebar_icon__notification"></span>
+										) : (
+											''
+										)}
+									</div>
 									<p
 										className={classNames('sidebar__header opacity', {
 											header_opacity: !toggle,

@@ -13,6 +13,7 @@ const messageSlice = createSlice({
 	initialState,
 	reducers: {
 		updateMessages(state, action: PayloadAction<any>) {
+			if(state.data?.messages)
 			state.data.messages = [...state.data.messages, action.payload];
 		},
 	},
@@ -39,7 +40,6 @@ const messageSlice = createSlice({
 			.addCase(
 				addMessages.fulfilled,
 				(state, action: PayloadAction<any>) => {
-					// state.data = action.payload.data;
 					state.isLoading = false;
 					state.error = null;
 				}
