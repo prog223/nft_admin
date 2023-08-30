@@ -44,7 +44,10 @@ export type CollectionT = {
 	creator: string;
 	image: string;
 	description: string;
-	nfts?: NftT[];
+	nfts?: {
+		nft: NftT[];
+		totalCount: number;
+	};
 };
 
 export type TabT = {
@@ -55,6 +58,6 @@ export type TabT = {
 export type MessageT = {
 	from?: string;
 	to?: string;
-	message?: string;
+	message?: any;
 	page?: number
 };

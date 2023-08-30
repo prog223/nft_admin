@@ -119,6 +119,10 @@
 			border-radius: 50%;
 			background-color: rgb(41, 65, 204);
 			font-size: 12px;
+			@include mobile{
+				right: 0;
+				top: 0;
+			}
 		}
 
 		@include mobile {
@@ -201,7 +205,7 @@
 }
 
 .EmojiPickerReact .epr-preview{
-	display: none;
+	display: none !important;
 }
 
 .EmojiPickerReact.epr-main{

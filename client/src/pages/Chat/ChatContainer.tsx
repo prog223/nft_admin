@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import useGetAdmin from '../../setup/hooks/useGetAdmin';
-import { Socket } from 'socket.io-client';
 import ChatInput from './ChatInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
@@ -10,20 +9,21 @@ import {
 	updateMessages,
 } from '../../redux/Message/messageSlice';
 import classNames from 'classnames';
+import { useChat } from '../../setup/contexts/socketContext';
 
 interface Props {
 	currentChat: { _id: string } | null;
-	socket: React.MutableRefObject<Socket | null>;
 }
 
-const ChatContainer: React.FC<Props> = ({ currentChat, socket }: Props) => {
+const ChatContainer: React.FC<Props> = ({ currentChat }: Props) => {
 	const admin = useGetAdmin();
-	const [arrivalMessage, setArrivalMessage] = useState<any>(null);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const dispatch = useDispatch<AppDispatch>();
 	const { data } = useSelector(selectMessages);
 	const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
+	const [trigger, setTrigger] = useState<boolean>(false);
+	const { socket, sendMessage, arrivalMessage } = useChat();
 
 	const receiveMessage = async (page: number) => {
 		if (admin._id && currentChat) {
@@ -49,12 +49,12 @@ const ChatContainer: React.FC<Props> = ({ currentChat, socket }: Props) => {
 	}, [data?.messages]);
 
 	useEffect(() => {
-		scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-	}, [data?.messages]);
+		scrollRef.current?.scrollIntoView();
+	}, [trigger]);
 
 	const handleSendMsg = async (msg: string) => {
-		if (currentChat && socket.current) {
-			socket.current.emit('send-msg', {
+		if (currentChat && socket) {
+			sendMessage({
 				to: currentChat._id,
 				from: admin?._id,
 				msg,
@@ -67,6 +67,7 @@ const ChatContainer: React.FC<Props> = ({ currentChat, socket }: Props) => {
 				})
 			);
 			dispatch(updateMessages({ fromSelf: true, message: msg }));
+			setTrigger(!trigger);
 		}
 	};
 
@@ -78,20 +79,6 @@ const ChatContainer: React.FC<Props> = ({ currentChat, socket }: Props) => {
 			}
 		}
 	};
-
-	useEffect(() => {
-		if (socket.current) {
-			socket.current.on('msg-recieve', (msg: any) => {
-				try {
-					if (msg.from == currentChat?._id) {
-						setArrivalMessage({ fromSelf: false, message: msg });
-					}
-				} catch (error) {
-					console.error('Error setting arrival message:', error);
-				}
-			});
-		}
-	}, []);
 
 	useEffect(() => {
 		if (arrivalMessage && arrivalMessage.message.from == currentChat?._id) {

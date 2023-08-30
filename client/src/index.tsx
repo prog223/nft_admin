@@ -10,7 +10,7 @@ import { ToastProvider } from './components/atoms/Toast/ToastProvider';
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 );
-root.render(
+root.render(	
 	<ToastProvider>
 		<Provider store={store}>
 			<App />

@@ -96,10 +96,12 @@ export const getContent = async (req, res, next) => {
 				const nft = await Nft.find({ collectionId: e.collection._id })
 					.limit(3)
 					.select('image');
-				e.collection.nfts = nft;
+				const totalCount = await Nft.countDocuments({
+					collectionId: e.collection._id,
+				});
+				e.collection.nfts = { totalCount, nft };
 			})
 		);
-
 		res.status(200).send(content);
 	} catch (error) {
 		next(error);

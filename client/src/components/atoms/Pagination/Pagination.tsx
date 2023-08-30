@@ -48,7 +48,7 @@ const PaginationItem = ({
 }) => {
 	const liClasses = classNames(
 		'page-item',
-		{ active: page == currentPage },
+		{ activeP: page == currentPage },
 		{ disabled: disable }
 	);
 

@@ -20,7 +20,7 @@ const SelectCollection: React.FC<Props> = ({
 }): JSX.Element => {
 	const [selected, setSelected] = useState<string>('');
 	const [collections, setCollections] = useState<CollectionT[] | null>(null);
-	const [collection, setCollection] = useState<CollectionT | null>(null);
+	const [collection, setCollection] = useState<any | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { isLoading: contentIsLoading } = useSelector(selectContent);
 
@@ -68,7 +68,13 @@ const SelectCollection: React.FC<Props> = ({
 					className={classNames('material-symbols-outlined', {
 						disable: content?.collection?._id === selected || !selected,
 					})}
-					onClick={() => handleClick({ selected, _id: content?._id, id: content?.collection?._id })}
+					onClick={() =>
+						handleClick({
+							selected,
+							_id: content?._id,
+							id: content?.collection?._id,
+						})
+					}
 				>
 					add_circle
 				</span>
@@ -103,7 +109,7 @@ const SelectCollection: React.FC<Props> = ({
 				) : (
 					<>
 						<div className="collections__grid">
-							{content?.collection?.nfts?.map((e: any) => (
+							{content?.collection?.nfts[0]?.nft?.map((e: any) => (
 								<div
 									className="collections__grid__item"
 									key={e._id}
@@ -114,8 +120,9 @@ const SelectCollection: React.FC<Props> = ({
 									/>
 								</div>
 							))}
-
-							<div className="collections__grid__item">1035+</div>
+							<div className="collections__grid__item">
+								+{content?.collection?.nfts[0]?.totalCount}
+							</div>
 						</div>
 						<div className="flex">
 							<p className="collections__title">
