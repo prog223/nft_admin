@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 import useMediaQuery from '../../../setup/hooks/useMeduaQuery';
 import useGetAdmin from '../../../setup/hooks/useGetAdmin';
 import './style.scss';
 import { useChat } from '../../../setup/contexts/socketContext';
+import NotificationSound from '../../../assets/images/notification.mp3';
 
 interface Props {
 	toggle: boolean;
@@ -26,6 +27,18 @@ const Sidebar: React.FC<Props> = ({
 			setToggle(false);
 		}
 	}, [mobile]);
+
+	const audioPlayer = useRef<any>(null);
+
+	function playAudio() {
+		audioPlayer.current.play();		
+	}
+
+	useEffect(() => {
+		if (notifications.length && location.pathname !== '/admin/chat') {
+			playAudio();
+		}
+	}, [notifications]);
 
 	return (
 		<div className={classNames('sidebar', { active: toggle })}>
@@ -220,6 +233,10 @@ const Sidebar: React.FC<Props> = ({
 									>
 										Chat
 									</p>
+									<audio
+										ref={audioPlayer}
+										src={NotificationSound}
+									/>
 								</Link>
 							</li>
 						</ul>
